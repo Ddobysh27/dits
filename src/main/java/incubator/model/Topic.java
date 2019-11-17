@@ -1,6 +1,7 @@
 package incubator.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Topic {
@@ -9,17 +10,17 @@ public class Topic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int topicId;
+
     @Column
     private String description;
+
     @Column
     private String name;
 
-    public Topic() {
-    }
+    @OneToMany(mappedBy = "topic", fetch = FetchType.EAGER)
+    private List<Test> tests;
 
-    public Topic(String description, String name) {
-        this.description = description;
-        this.name = name;
+    public Topic() {
     }
 
     public int getTopicId() {
@@ -44,5 +45,13 @@ public class Topic {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Test> getTests() {
+        return tests;
+    }
+
+    public void setTests(List<Test> tests) {
+        this.tests = tests;
     }
 }

@@ -2,31 +2,31 @@ package incubator.dao;
 
 import incubator.config.HibernateConfig;
 import incubator.config.WebConfig;
-import incubator.model.Topic;
-import incubator.service.TopicService;
+import incubator.model.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.testng.annotations.Test;
 
-//@EnableTransactionManagement
+import static org.testng.Assert.*;
+
 @ComponentScan(basePackages = "incubator")
 @ContextConfiguration(classes = {WebConfig.class, HibernateConfig.class})
 @WebAppConfiguration
 @PropertySource("classpath:db.properties")
 @PropertySource(value = "classpath:hibernate.properties")
-public class TopicRepositoryTest extends AbstractTestNGSpringContextTests{
+public class AnswerRepositoryTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
-    private TopicRepository topicRepository;
+    private AnswerRepository answerRepository;
 
     @Test
     public void testSave() {
-        Topic topic = new Topic();
-        topicRepository.save(topic);
+        Answer answer = new Answer();
+        answerRepository.save(answer);
     }
+
 }
