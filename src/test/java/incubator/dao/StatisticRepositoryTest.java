@@ -29,4 +29,6 @@ public class StatisticRepositoryTest extends AbstractTestNGSpringContextTests {
             System.out.println(s);
         }
     }
+
+
 }
