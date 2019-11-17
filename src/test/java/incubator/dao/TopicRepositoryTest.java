@@ -3,17 +3,15 @@ package incubator.dao;
 import incubator.config.HibernateConfig;
 import incubator.config.WebConfig;
 import incubator.model.Topic;
-import incubator.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.testng.annotations.Test;
 
-//@EnableTransactionManagement
+
 @ComponentScan(basePackages = "incubator")
 @ContextConfiguration(classes = {WebConfig.class, HibernateConfig.class})
 @WebAppConfiguration
@@ -25,8 +23,11 @@ public class TopicRepositoryTest extends AbstractTestNGSpringContextTests{
     private TopicRepository topicRepository;
 
     @Test
-    public void testSave() {
-        Topic topic = new Topic();
-        topicRepository.save(topic);
+    public void showAll() {
+        for (Topic q : topicRepository.findAll()
+        ) {
+            System.out.println(q);
+        }
     }
+
 }

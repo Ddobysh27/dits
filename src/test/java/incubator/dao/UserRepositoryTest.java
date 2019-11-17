@@ -1,7 +1,9 @@
 package incubator.dao;
 
+
 import incubator.config.HibernateConfig;
 import incubator.config.WebConfig;
+import incubator.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
@@ -10,22 +12,21 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.testng.annotations.Test;
 
-
 @ComponentScan(basePackages = "incubator")
 @ContextConfiguration(classes = {WebConfig.class, HibernateConfig.class})
 @WebAppConfiguration
 @PropertySource("classpath:db.properties")
 @PropertySource(value = "classpath:hibernate.properties")
-public class TestRepositoryTest extends AbstractTestNGSpringContextTests {
+public class UserRepositoryTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
-    private TestRepository testRepository;
+    UserRepository userRepository;
 
     @Test
     public void showAll() {
-        for (incubator.model.Test q : testRepository.findAll()
+        for (User u : userRepository.findAll()
         ) {
-            System.out.println(q);
+            System.out.println(u);
         }
     }
 

@@ -1,5 +1,6 @@
 package incubator.config;
 
+import incubator.dao.RoleRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +14,6 @@ import org.springframework.web.servlet.view.JstlView;
 @ComponentScan(basePackages = "incubator")
 public class WebConfig {
 
-
     @Bean
     ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
@@ -22,4 +22,5 @@ public class WebConfig {
         viewResolver.setSuffix(".jsp");
         return viewResolver;
     }
+
 }

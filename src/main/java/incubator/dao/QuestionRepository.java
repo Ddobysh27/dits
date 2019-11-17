@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public class QuestionRepository {
 
@@ -15,7 +17,7 @@ public class QuestionRepository {
     private SessionFactory sessionFactory;
 
     @Transactional
-    public Question save(Question question){
+    public Question save(Question question) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.save(question);
@@ -23,4 +25,11 @@ public class QuestionRepository {
         session.close();
         return question;
     }
+
+    @Transactional
+    public List<Question> findAll() {
+        List<Question> questions = (List<Question>) sessionFactory.openSession().createQuery("From Question").list();
+        return questions;
+    }
+
 }

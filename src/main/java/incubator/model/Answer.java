@@ -16,10 +16,21 @@ public class Answer {
     private String correct;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "topicId")
+    @JoinColumn(name = "questionId")
     private Question question;
 
     public Answer() {
+    }
+
+
+    @Override
+    public String toString() {
+        return "Answer{" +
+                "answerId=" + answerId +
+                ", description='" + description + '\'' +
+                ", correct='" + correct + '\'' +
+                ", question=" + question.getDescription() +
+                '}';
     }
 
     public int getAnswerId() {

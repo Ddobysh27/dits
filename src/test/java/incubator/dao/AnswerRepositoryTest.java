@@ -11,7 +11,6 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
 
 @ComponentScan(basePackages = "incubator")
 @ContextConfiguration(classes = {WebConfig.class, HibernateConfig.class})
@@ -24,9 +23,11 @@ public class AnswerRepositoryTest extends AbstractTestNGSpringContextTests {
     private AnswerRepository answerRepository;
 
     @Test
-    public void testSave() {
-        Answer answer = new Answer();
-        answerRepository.save(answer);
+    public void showAll() {
+        for (Answer a : answerRepository.findAll()
+        ) {
+            System.out.println(a);
+        }
     }
 
 }
