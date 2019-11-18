@@ -30,6 +30,14 @@ public class QuestionRepositoryTest extends AbstractTestNGSpringContextTests {
         }
     }
 
+    @Test
+    public void testsDifficulty() {
+        for (Question q : questionRepository.findAll()
+        ) {
+            System.out.println(q.getDescription() +" - "+questionRepository.testsDifficulty(q.getQuestionId()));
+        }
+    }
+
 
 }
 

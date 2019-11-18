@@ -40,7 +40,7 @@ public class TestRepository {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/managementsystem", "root", "123qwe");
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select   difficultyrate("+x+")");
+            ResultSet rs = st.executeQuery("select   testdifficulty("+x+")");
             while (rs.next()) {
                 return rs.getDouble(1);
             }
