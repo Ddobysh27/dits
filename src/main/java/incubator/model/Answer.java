@@ -13,7 +13,7 @@ public class Answer {
     private String description;
 
     @Column
-    private String correct;
+    private boolean correct;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "topicId")
@@ -38,11 +38,11 @@ public class Answer {
         this.description = description;
     }
 
-    public String getCorrect() {
+    public boolean isCorrect() {
         return correct;
     }
 
-    public void setCorrect(String correct) {
+    public void setCorrect(boolean correct) {
         this.correct = correct;
     }
 
