@@ -1,6 +1,7 @@
 package incubator.dao;
 
-import incubator.model.Topic;
+
+import incubator.model.Role;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -10,27 +11,27 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+
 @Repository
-public class TopicRepository {
+public class RoleRepository {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Transactional
-    public Topic save(Topic topic){
+    public Role save(Role role){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.save(topic);
+        session.save(role);
         transaction.commit();
         session.close();
-        return topic;
+        return role;
     }
 
     @Transactional
-    public List<Topic> findAll() {
-        List<Topic> topics = (List<Topic>) sessionFactory.openSession().createQuery("From Topic").list();
-        return topics;
+    public List<Role> findAll() {
+        List<Role> roles = (List<Role>) sessionFactory.openSession().createQuery("From Role").list();
+        return roles;
     }
-
 
 }

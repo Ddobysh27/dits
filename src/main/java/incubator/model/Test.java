@@ -22,6 +22,17 @@ public class Test {
     @OneToMany(mappedBy = "test", fetch = FetchType.EAGER)
     private List<Question> questions;
 
+    @Override
+    public String toString() {
+        return "Test{" +
+                "testId=" + testId +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", topic=" + topic.getName() +
+                ", questions=" + questions +
+                '}';
+    }
+
     public Test() {
     }
 

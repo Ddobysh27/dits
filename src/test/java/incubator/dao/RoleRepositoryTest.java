@@ -2,6 +2,8 @@ package incubator.dao;
 
 import incubator.config.HibernateConfig;
 import incubator.config.WebConfig;
+
+import incubator.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
@@ -16,24 +18,16 @@ import org.testng.annotations.Test;
 @WebAppConfiguration
 @PropertySource("classpath:db.properties")
 @PropertySource(value = "classpath:hibernate.properties")
-public class TestRepositoryTest extends AbstractTestNGSpringContextTests {
+public class RoleRepositoryTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
-    private TestRepository testRepository;
+    private RoleRepository roleRepository;
 
     @Test
     public void showAll() {
-        for (incubator.model.Test q : testRepository.findAll()
+        for (Role r : roleRepository.findAll()
         ) {
-            System.out.println(q);
-        }
-    }
-
-    @Test
-    public void testsDifficulty() {
-        for (incubator.model.Test q : testRepository.findAll()
-        ) {
-            System.out.println(q.getName() +" - "+testRepository.testsDifficulty(q.getTestId()));
+            System.out.println(r);
         }
     }
 
