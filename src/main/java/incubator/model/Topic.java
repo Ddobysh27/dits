@@ -20,6 +20,17 @@ public class Topic {
     @OneToMany(mappedBy = "topic", fetch = FetchType.EAGER)
     private List<Test> tests;
 
+
+    @Override
+    public String toString() {
+        return "Topic{" +
+                "topicId=" + topicId +
+                ", description='" + description + '\'' +
+                ", name='" + name + '\'' +
+                ", tests=" + tests +
+                '}';
+    }
+
     public Topic() {
     }
 

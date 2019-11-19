@@ -11,9 +11,7 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
 
-//@EnableTransactionManagement
 @ComponentScan(basePackages = "incubator")
 @ContextConfiguration(classes = {WebConfig.class, HibernateConfig.class})
 @WebAppConfiguration
@@ -25,10 +23,22 @@ public class QuestionRepositoryTest extends AbstractTestNGSpringContextTests {
     private QuestionRepository questionRepository;
 
     @Test
-    public void testSave() {
-        Question question = new Question();
-        questionRepository.save(question);
+    public void showAll() {
+        for (Question q : questionRepository.findAll()
+        ) {
+            System.out.println(q);
+        }
     }
+
+    @Test
+    public void testsDifficulty() {
+        for (Question q : questionRepository.findAll()
+        ) {
+            System.out.println(q.getDescription() +" - "+questionRepository.testsDifficulty(q.getQuestionId()));
+        }
+    }
+
+
 }
 
 
