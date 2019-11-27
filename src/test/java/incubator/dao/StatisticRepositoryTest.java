@@ -24,11 +24,10 @@ public class StatisticRepositoryTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void showAll() {
-        for (Statistic s : statisticRepository.findAll()
+        for (Statistic s : statisticRepository.findAll(Statistic.class, statisticRepository.getBeanToBeAutowired())
         ) {
             System.out.println(s);
         }
     }
-
 
 }

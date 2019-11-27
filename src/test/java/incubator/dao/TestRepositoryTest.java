@@ -23,15 +23,15 @@ public class TestRepositoryTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void showAll() {
-        for (incubator.model.Test q : testRepository.findAll()
+        for (incubator.model.Test test : testRepository.findAll(incubator.model.Test.class, testRepository.getBeanToBeAutowired())
         ) {
-            System.out.println(q);
+            System.out.println(test);
         }
     }
 
     @Test
     public void testsDifficulty() {
-        for (incubator.model.Test q : testRepository.findAll()
+        for (incubator.model.Test q : testRepository.findAll(incubator.model.Test.class, testRepository.getBeanToBeAutowired())
         ) {
             System.out.println(q.getName() +" - "+testRepository.testsDifficulty(q.getTestId()));
         }

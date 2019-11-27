@@ -25,7 +25,7 @@ public class RoleRepositoryTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void showAll() {
-        for (Role r : roleRepository.findAll()
+        for (Role r : roleRepository.findAll(Role.class, roleRepository.getBeanToBeAutowired())
         ) {
             System.out.println(r);
         }

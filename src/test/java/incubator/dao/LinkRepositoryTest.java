@@ -24,7 +24,7 @@ public class LinkRepositoryTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void showAll() {
-        for (Link l : linkRepository.findAll()
+        for (Link l : linkRepository.findAll(Link.class, linkRepository.getBeanToBeAutowired())
         ) {
             System.out.println(l);
         }

@@ -1,3 +1,4 @@
+/*
 package incubator.service;
 
 
@@ -12,3 +13,4 @@ public class QuestionService {
     private QuestionRepository questionRepository;
 
 }
+*/

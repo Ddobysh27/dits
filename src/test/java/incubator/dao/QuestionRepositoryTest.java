@@ -18,13 +18,13 @@ import org.testng.annotations.Test;
 @PropertySource("classpath:db.properties")
 @PropertySource(value = "classpath:hibernate.properties")
 public class QuestionRepositoryTest extends AbstractTestNGSpringContextTests {
-    
+
     @Autowired
     private QuestionRepository questionRepository;
 
     @Test
     public void showAll() {
-        for (Question q : questionRepository.findAll()
+        for (Question q : questionRepository.findAll(Question.class, questionRepository.getBeanToBeAutowired())
         ) {
             System.out.println(q);
         }
@@ -32,7 +32,7 @@ public class QuestionRepositoryTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testsDifficulty() {
-        for (Question q : questionRepository.findAll()
+        for (Question q : questionRepository.findAll(Question.class, questionRepository.getBeanToBeAutowired())
         ) {
             System.out.println(q.getDescription() +" - "+questionRepository.testsDifficulty(q.getQuestionId()));
         }

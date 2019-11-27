@@ -23,10 +23,9 @@ public class LiteratureRepositoryTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void showAll() {
-        for (Literature l : literatureRepository.findAll()
+        for (Literature literature : literatureRepository.findAll(Literature.class, literatureRepository.getBeanToBeAutowired())
         ) {
-            System.out.println(l);
+            System.out.println(literature);
         }
     }
-
 }

@@ -24,7 +24,7 @@ public class AnswerRepositoryTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void showAll() {
-        for (Answer a : answerRepository.findAll()
+        for (Answer a : answerRepository.findAll(Answer.class, answerRepository.getBeanToBeAutowired())
         ) {
             System.out.println(a);
         }

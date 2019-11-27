@@ -1,3 +1,4 @@
+/*
 package incubator.service;
 
 import incubator.dao.TopicRepository;
@@ -12,8 +13,5 @@ public class TopicService {
     @Autowired
     TopicRepository topicRepository;
 
-    @Transactional
-    public void save(Topic topic) {
-        topicRepository.save(topic);
-    }
 }
+*/

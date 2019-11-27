@@ -1,8 +1,9 @@
-package incubator.dao;
+package incubator.service;
 
 import incubator.config.HibernateConfig;
 import incubator.config.WebConfig;
-import incubator.model.Topic;
+import incubator.dao.AnswerRepository;
+import incubator.model.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
@@ -11,22 +12,22 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.*;
 
 @ComponentScan(basePackages = "incubator")
 @ContextConfiguration(classes = {WebConfig.class, HibernateConfig.class})
 @WebAppConfiguration
 @PropertySource("classpath:db.properties")
 @PropertySource(value = "classpath:hibernate.properties")
-public class TopicRepositoryTest extends AbstractTestNGSpringContextTests{
+public class StatisticServiceTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
-    private TopicRepository topicRepository;
+    private StatisticService statisticService;
 
     @Test
     public void showAll() {
-        for (Topic q : topicRepository.findAll(Topic.class, topicRepository.getBeanToBeAutowired())
-        ) {
-            System.out.println(q);
+        for (int i = 1; i < 6; i++) {
+            statisticService.userStatistic(i);
         }
     }
 

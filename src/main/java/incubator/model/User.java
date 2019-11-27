@@ -22,11 +22,6 @@ public class User {
     @JoinColumn(name = "roleId")
     private Role role;
 
-/*
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<Statistic> statistics;
-*/
-
 
 
     @Override
@@ -38,17 +33,15 @@ public class User {
                 ", login='" + login + '\'' +
                 ", password=" + password +
                 ", role=" + role.getRoleId() +
-          //      ", statistics=" + statistics +
                 '}';
     }
 
-    public User(String firstName, String lastName, String login, int password, Role role, List<Statistic> statistics) {
+    public User(String firstName, String lastName, String login, int password, Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;
         this.password = password;
         this.role = role;
- //       this.statistics = statistics;
     }
 
     public User() {
@@ -102,11 +95,4 @@ public class User {
         this.role = role;
     }
 
-/*    public List<Statistic> getStatistics() {
-     return statistics;
-    }
-
-    public void setStatistics(List<Statistic> statistics) {
-        this.statistics = statistics;
-    }*/
 }
