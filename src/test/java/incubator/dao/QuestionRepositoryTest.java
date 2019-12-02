@@ -34,10 +34,9 @@ public class QuestionRepositoryTest extends AbstractTestNGSpringContextTests {
     public void testsDifficulty() {
         for (Question q : questionRepository.findAll(Question.class, questionRepository.getBeanToBeAutowired())
         ) {
-            System.out.println(q.getDescription() +" - "+questionRepository.testsDifficulty(q.getQuestionId()));
+            System.out.println(q.getDescription() + " - " + questionRepository.testsDifficulty(q.getQuestionId()));
         }
     }
-
 
 }
 

@@ -23,6 +23,8 @@ public class StatisticService {
         List<Statistic> allUserList = new ArrayList<>();
         List<Statistic> correctUserList = new ArrayList<>();
 
+
+
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getUser().getUserId() == id) {
                 if (list.get(i).getCorrect() == 1) {
