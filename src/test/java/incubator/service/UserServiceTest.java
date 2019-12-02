@@ -1,5 +1,7 @@
-package incubator.config;
+package incubator.service;
 
+import incubator.config.HibernateConfig;
+import incubator.config.WebConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
@@ -16,14 +18,13 @@ import static org.testng.Assert.*;
 @WebAppConfiguration
 @PropertySource("classpath:db.properties")
 @PropertySource(value = "classpath:hibernate.properties")
-public class CustomSuccessHandlerTest extends AbstractTestNGSpringContextTests {
+public class UserServiceTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
-    CustomSuccessHandler customSuccessHandler;
+    UserService userService;
 
     @Test
-    public void showUsernames() {
-        System.out.println(customSuccessHandler.getUserByUsername("Pakistani"));
+    public void testGetUsernames() {
+        System.out.println(userService.getUsernames());
     }
-
 }

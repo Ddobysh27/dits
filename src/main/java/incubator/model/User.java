@@ -23,7 +23,6 @@ public class User {
     private Role role;
 
 
-
     @Override
     public String toString() {
         return "User{" +
@@ -45,6 +44,16 @@ public class User {
     }
 
     public User() {
+    }
+
+    public String getNormanRole() {
+        if (role.getAdmin() == 1) {
+            return "ADMIN";
+        } else if (role.getUser() == 1) {
+            return "USER";
+        } else {
+            return "TUTOR";
+        }
     }
 
     public int getUserId() {

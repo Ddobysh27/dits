@@ -2,6 +2,7 @@ package incubator.config;
 
 import incubator.dao.UserRepository;
 import incubator.model.User;
+import incubator.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,13 +22,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private CustomSuccessHandler customSuccessHandler;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     public void setCustomSuccessHandler(CustomSuccessHandler customSuccessHandler) {
         this.customSuccessHandler = customSuccessHandler;
     }
 
+    @Autowired
+    UserService userService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -39,21 +39,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-        List<User> list = userRepository.findAll(User.class, userRepository.getBeanToBeAutowired());
-/*
-        auth.inMemoryAuthentication()
-                .passwordEncoder(passwordEncoder)
-                .withUser()*/
+        for (User u : userService.getAllUsers()
+        ) {
+            auth.inMemoryAuthentication().passwordEncoder(passwordEncoder)
+                    .withUser(u.getLogin())
+                    .password(passwordEncoder.encode("" + u.getPassword()))
+                    .roles(u.getNormanRole());
+        }
 
-        auth.inMemoryAuthentication()
+/*        auth.inMemoryAuthentication()
                 .passwordEncoder(passwordEncoder)
                 .withUser("user").password(passwordEncoder.encode("user")).roles("USER")
                 .and()
                 .withUser("admin").password(passwordEncoder.encode("admin")).roles("ADMIN")
                 .and()
-                .withUser("tutor").password(passwordEncoder.encode("tutor")).roles("TUTOR");
-
-
+                .withUser("tutor").password(passwordEncoder.encode("tutor")).roles("TUTOR");*/
     }
 
     @Override

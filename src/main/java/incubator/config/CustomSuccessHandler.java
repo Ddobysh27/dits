@@ -2,13 +2,16 @@ package incubator.config;
 
 import incubator.dao.UserRepository;
 import incubator.model.User;
+import incubator.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import org.springframework.test.context.ContextConfiguration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,38 +23,37 @@ import java.util.List;
 @Component
 public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-
     @Autowired
-    private UserRepository userRepository;
+    UserService userService;
+
+    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     @Override
     protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
             throws IOException {
         String targetUrl = determineTargetUrl(authentication);
-
         if (response.isCommitted()) {
             System.out.println("Can't redirect");
             return;
         }
-
         redirectStrategy.sendRedirect(request, response, targetUrl);
     }
 
-/*    public User getUserByUsername(String username) {
-        List<User> list = userRepository.findAll(User.class, userRepository.getBeanToBeAutowired());
-        if ()
-    }*/
-
-    public List<String> getUsernames() {
-        List<User> list = userRepository.findAll(User.class, userRepository.getBeanToBeAutowired());
-        List <String> usernames = new ArrayList<>();
-        for (User u: list
-             ) {
-            usernames.add(u.getLogin());
+    public User getUserByUsername(String username) {
+        User outUser = new User();
+        if (userService.getUsernames().contains(username)) {
+            List<User> users = userService.getAllUsers();
+            for (User u : users
+            ) {
+                if (u.getLogin().equals(username))
+                    outUser = u;
+            }
+        } else {
+            System.out.println("Неверное имя пользователя!");
         }
-        return usernames;
+        return outUser;
     }
+
 
     /*
      * This method extracts the roles of currently logged-in user and returns
