@@ -17,19 +17,25 @@ public class HomeController {
     @GetMapping(value = "/admin")
     public String adminPage(ModelMap model) {
         model.addAttribute("user", getPrincipal());
-        return "admin";
+        return "Admin/admin";
     }
 
     @GetMapping(value = "/user")
     public String userPage(ModelMap model) {
         model.addAttribute("user", getPrincipal());
-        return "user";
+        return "User/user";
     }
 
     @GetMapping(value = "/tutor")
     public String tutorPage(ModelMap model) {
         model.addAttribute("user", getPrincipal());
-        return "tutor";
+        return "Tutor/tutor";
+    }
+
+    @GetMapping(value = "/Access_Denied")
+    public String accessDenied(ModelMap model) {
+        model.addAttribute("user", getPrincipal());
+        return "Access_Denied";
     }
 
     @GetMapping(value = "/login")

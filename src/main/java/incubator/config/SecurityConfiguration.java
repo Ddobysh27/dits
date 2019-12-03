@@ -46,14 +46,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .password(passwordEncoder.encode("" + u.getPassword()))
                     .roles(u.getNormanRole());
         }
-
-/*        auth.inMemoryAuthentication()
-                .passwordEncoder(passwordEncoder)
-                .withUser("user").password(passwordEncoder.encode("user")).roles("USER")
-                .and()
-                .withUser("admin").password(passwordEncoder.encode("admin")).roles("ADMIN")
-                .and()
-                .withUser("tutor").password(passwordEncoder.encode("tutor")).roles("TUTOR");*/
     }
 
     @Override
