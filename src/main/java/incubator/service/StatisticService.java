@@ -18,12 +18,9 @@ public class StatisticService {
     public void userStatistic(int id) {
         double userRate = 0;
         int var = 0;
-
         List<Statistic> list = statisticRepository.findAll(Statistic.class, statisticRepository.getBeanToBeAutowired());
         List<Statistic> allUserList = new ArrayList<>();
         List<Statistic> correctUserList = new ArrayList<>();
-
-
 
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getUser().getUserId() == id) {
@@ -37,7 +34,6 @@ public class StatisticService {
 
         userRate = ((double) correctUserList.size() / allUserList.size()) * 100;
         System.out.println("Рейтинг пользователя " + list.get(var).getUser().getFirstName() + " - " + userRate + "%");
-
     }
 
 }

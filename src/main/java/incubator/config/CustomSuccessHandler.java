@@ -50,6 +50,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
             }
         } else {
             System.out.println("Неверное имя пользователя!");
+            throw new NullPointerException("Такой логин не найден в методе getUserByUsername");
         }
         return outUser;
     }

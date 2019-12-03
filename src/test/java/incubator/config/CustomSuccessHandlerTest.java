@@ -23,7 +23,7 @@ public class CustomSuccessHandlerTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void showUsernames() {
-        System.out.println(customSuccessHandler.getUserByUsername("Pakistani"));
+        System.out.println(customSuccessHandler.getUserByUsername("AllahuAkbar"));
     }
 
 }
