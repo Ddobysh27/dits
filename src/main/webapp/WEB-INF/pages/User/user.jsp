@@ -3,8 +3,11 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
-	<body>
-    <a href="<c:url value="/logout" />">выйти</a>
-    <h1> Hello ${user}</h1>
-	</body>
+<body>
+<h1> Hello ${user}</h1>
+<a href="<c:url value="/chooseTest" />">Выборе темы и теста</a> <br>
+<a href="<c:url value="/personalStatistic" />">Личная статистика</a> <br>
+
+<a href="<c:url value="/logout" />">выйти</a>
+</body>
 </html>
