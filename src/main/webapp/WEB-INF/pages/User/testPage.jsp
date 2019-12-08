@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <body>
-<h1> Hello ${user}</h1>
 
 <form action="/nextTestPage1">
 

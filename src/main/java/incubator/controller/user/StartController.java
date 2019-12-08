@@ -12,9 +12,11 @@ public class StartController {
         return "User/UserChoose";
     }
 
+/*
     @GetMapping(value = "/personalStatistic")
     public String personalStatisticPage() {
         return "User/personalStatistic";
     }
+*/
 
 }

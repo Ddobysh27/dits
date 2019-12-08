@@ -4,6 +4,7 @@ package incubator.dao;
 import incubator.config.HibernateConfig;
 import incubator.config.WebConfig;
 import incubator.model.Statistic;
+import incubator.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
@@ -21,6 +22,9 @@ public class StatisticRepositoryTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
     private StatisticRepository statisticRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Test
     public void showAll() {

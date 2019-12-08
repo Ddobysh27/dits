@@ -46,6 +46,16 @@ public class Question {
     public Question() {
     }
 
+    public String getLiteratures() {
+        String str = "";
+        for (Literature l : getLiteratureList()
+        ) {
+            str += l.getDescription() + "\n";
+        }
+        return str;
+    }
+
+
     public List<Statistic> getStatisticList() {
         return statisticList;
     }

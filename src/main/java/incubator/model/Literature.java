@@ -42,10 +42,18 @@ public class Literature {
         this.links = links;
     }
 
-
     public Literature(String description, Question question) {
         this.description = description;
         this.question = question;
+    }
+
+    public String getCasualLinks() {
+        String str = "";
+        for (Link l : links
+        ) {
+            str += l.getLink() + "\n";
+        }
+        return str;
     }
 
     public Literature() {
@@ -59,7 +67,7 @@ public class Literature {
         this.literatureId = literatureId;
     }
 
-    public String getDescription() {
+    String getDescription() {
         return description;
     }
 

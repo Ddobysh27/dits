@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html>
 <body>
-<h1> Hello ${user}</h1>
+
+<form action="/goTest" >
 
 <select>
     <option disabled> Название темы </option>
@@ -18,7 +19,7 @@
     <option> Тест 2 </option>
 </select>
 <br>
-<form action="/goTest" >
+
     <input type="submit" value="Пройти тестирование">
 </form>
 

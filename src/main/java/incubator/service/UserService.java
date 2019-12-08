@@ -24,8 +24,26 @@ public class UserService {
         return usernames;
     }
 
+
+    public User getUserByUsername(String username) {
+        User outUser = new User();
+        if (getUsernames().contains(username)) {
+            List<User> users = getAllUsers();
+            for (User u : users
+            ) {
+                if (u.getLogin().equals(username))
+                    outUser = u;
+            }
+        } else {
+            System.out.println("Неверное имя пользователя!");
+            throw new NullPointerException("Такой логин не найден в методе getUserByUsername");
+        }
+        return outUser;
+    }
+
     public List<User> getAllUsers() {
         return userRepository.findAll(User.class, userRepository.getBeanToBeAutowired());
     }
+
 
 }

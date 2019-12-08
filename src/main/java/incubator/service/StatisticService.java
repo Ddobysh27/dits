@@ -15,6 +15,10 @@ public class StatisticService {
     private StatisticRepository statisticRepository;
 
 
+    public List<Statistic> findAll() {
+        return statisticRepository.findAll(Statistic.class, statisticRepository.getBeanToBeAutowired());
+    }
+
     public void userStatistic(int id) {
         double userRate = 0;
         int var = 0;

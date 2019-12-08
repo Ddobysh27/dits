@@ -13,21 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ChooseController {
 
     @GetMapping(value = "/goTest")
-    public String goTest(ModelMap modelMap) {
-        modelMap.addAttribute("user", getPrincipal());
+    public String goTest() {
         return "User/testPage";
     }
 
-    static String getPrincipal() {
-        String userName = null;
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (principal instanceof UserDetails) {
-            userName = ((UserDetails) principal).getUsername();
-        } else {
-            userName = principal.toString();
-        }
-        return userName;
-    }
 
 }
