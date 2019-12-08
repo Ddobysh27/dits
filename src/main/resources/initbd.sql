@@ -1,3 +1,4 @@
+/*
 Use `managementsystem`;
 unlock tables;
 
@@ -23,7 +24,8 @@ CREATE TABLE `test`(
 CREATE TABLE `question`(
   `questionId` integer(10) PRIMARY KEY  NOT NULL AUTO_INCREMENT,
   `description` varchar(100),
-  `testId` integer(10)
+  `testId` integer(10),
+    FOREIGN KEY (`testId`) REFERENCES `test` (`testId`) ON DELETE CASCADE
   );
 
 CREATE TABLE `answer`(
@@ -87,16 +89,8 @@ LOCK TABLES `test` WRITE;
 INSERT INTO `test` VALUES
 (1,'First test','For topic 1','1'),
 (2,'Second test','For topic 2','2'),
-(3, 'Third Test', 'For topic 2', 2),
-(4, 'Forth Test', 'For topic 1', 1);
-UNLOCK TABLES;
-
-LOCK TABLES `question` WRITE;
-INSERT INTO `question` VALUES
-(1,'First question','1'),
-(2,'Second question','2'),
-(3,'Third question','1'),
-(4,'Forth question','2');
+(3, "Third Test", "For topic 2", 2),
+(4, "Forth Test", "For topic 1", 1);
 UNLOCK TABLES;
 
 LOCK TABLES `role` WRITE;
@@ -106,38 +100,22 @@ UNLOCK TABLES;
 
 lock tables user write;
 insert into user values
-(1, 'Gavin', 'Belson', 'GavinBelson', 101, 1),
-(2, 'Peter', 'Gregory', 'PeetGreg', 102, 3),
-(3, 'Richard', 'Hendrics', 'RichHen', 103, 2),
-(4, 'Gilfoy', 'Canadian', 'Canadaonelove', 104, 1),
-(5, 'Denesh', 'Pakistan', 'Pakistani', 105, 3);
+(1, "Gavin", "Belson", "GavinBelson", 101, 1),
+(2, "Peter", "Gregory", "PeetGreg", 102, 3),
+(3, "Richard", "Hendrics", "RichHen", 103, 2),
+(4, "Gilfoy", "Canadian", "Canadaonelove", 104, 1),
+(5, "Denesh", "Pakistan", "Pakistani", 105, 3);
 unlock tables;
 
-LOCK TABLES `answer` WRITE;
-INSERT INTO `answer` VALUES
-(1,'1 true answer on first question','1','1'),
-(2,'2 false answer on first question','0','1'),
-(3,'3 true answer on second question','1','2'),
-(4,'4 false answer on second question','0','2');
+LOCK TABLES `question` WRITE;
+INSERT INTO `question` VALUES
+(1,'First question','1'),
+(2,'Second question','2'),
+(3,'Third question','1'),
+(4,'Forth question','2');
 UNLOCK TABLES;
 
-lock tables literature write;
-insert into literature values
-(1, 'First lit', 1),
-(2, 'Second lit', 4),
-(3, 'Third lit', 2),
-(4, 'Forth lit', 3);
-unlock tables;
-
-lock tables link write;
-insert into link values 
-(1, 'firstLink', 4),
-(2, 'secondLink', 3),
-(3, 'thirdLink', 2),
-(4, 'forthLink', 1);
-unlock tables;
-
-LOCK tables `statistic` WRITE;
+LOCK TABLE `statistic` WRITE;
 INSERT INTO `statistic` VALUES
 (1, '2001-12-10', 1, 1, 1),
 (2, '2001-12-11', 0, 2, 2),
@@ -153,6 +131,34 @@ INSERT INTO `statistic` VALUES
 (12, '2001-12-21', 1, 2, 3);
 UNLOCK TABLES;
 
+
+lock tables literature write;
+insert into literature values
+(1, "First lit", 1),
+(2, "Second lit", 4),
+(3, "Third lit", 2),
+(4, "Forth lit", 3);
+unlock tables;
+
+
+lock tables link write;
+insert into link values
+(1, "firstLink", 4),
+(2, "secondLink", 3),
+(3, "thirdLink", 2),
+(4, "forthLink", 1);
+unlock tables;
+
+
+LOCK TABLES `answer` WRITE;
+INSERT INTO `answer` VALUES
+(1,'1 true answer on first question','1','1'),
+(2,'2 false answer on first question','0','1'),
+(3,'3 true answer on second question','1','2'),
+(4,'4 false answer on second question','0','2');
+UNLOCK TABLES;
+
+
 create view questionstatistic as
 select count(statistic.correct) as count, correct, statistic.questionId
 from statistic join question on statistic.questionId = question.questionId
@@ -165,7 +171,7 @@ from statistic
 join question on statistic.questionId = question.questionId
 join test on test.testId = question.testId
 group by test.testId, statistic.correct
-order by question.questionId;
+order by statistic.questionId;
 
 DELIMITER //
 
@@ -197,3 +203,4 @@ END
 
 DELIMITER ;
 
+*/
