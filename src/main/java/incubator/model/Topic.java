@@ -1,5 +1,8 @@
 package incubator.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -18,6 +21,7 @@ public class Topic {
     private String name;
 
     @OneToMany(mappedBy = "topic", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Test> tests;
 
 

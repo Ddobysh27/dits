@@ -1,5 +1,8 @@
 package incubator.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,7 +20,9 @@ public class Role {
     private int admin;
 
     @OneToMany(mappedBy = "role", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<User> users;
+
 
     @Override
     public String toString() {
@@ -37,6 +42,15 @@ public class Role {
 
     public Role() {
     }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
 
     public int getRoleId() {
         return roleId;

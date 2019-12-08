@@ -10,6 +10,7 @@ public class Link {
     @GeneratedValue
     private int linkId;
     private String link;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "literatureId")
     private Literature literature;

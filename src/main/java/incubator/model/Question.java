@@ -1,5 +1,8 @@
 package incubator.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -19,8 +22,16 @@ public class Question {
     private Test test;
 
     @OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Answer> answers;
 
+    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Statistic> statisticList;
+
+    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Literature> literatureList;
 
     @Override
     public String toString() {
@@ -33,6 +44,22 @@ public class Question {
     }
 
     public Question() {
+    }
+
+    public List<Statistic> getStatisticList() {
+        return statisticList;
+    }
+
+    public void setStatisticList(List<Statistic> statisticList) {
+        this.statisticList = statisticList;
+    }
+
+    public List<Literature> getLiteratureList() {
+        return literatureList;
+    }
+
+    public void setLiteratureList(List<Literature> literatureList) {
+        this.literatureList = literatureList;
     }
 
     public int getQuestionId() {
