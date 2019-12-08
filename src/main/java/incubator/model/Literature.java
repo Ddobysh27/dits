@@ -1,6 +1,9 @@
 package incubator.model;
 
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -16,7 +19,8 @@ public class Literature {
     @JoinColumn(name = "questionId")
     private Question question;
 
-    @OneToMany(mappedBy = "literature", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "literature", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Link> links;
 
 
