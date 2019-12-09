@@ -1,6 +1,5 @@
 package incubator.config;
 
-import incubator.dao.UserRepository;
 import incubator.model.User;
 import incubator.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -51,7 +48,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/home").access("hasRole('USER')")
+                .antMatchers("/").permitAll()
+                .antMatchers("/user/**").access("hasRole('USER')")
                 .antMatchers("/admin/**").access("hasRole('ADMIN')")
                 .antMatchers("/tutor/**").access("hasRole('TUTOR')")
                 .and().formLogin().loginPage("/login").successHandler(customSuccessHandler)
