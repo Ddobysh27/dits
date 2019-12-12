@@ -14,6 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class HomeController {
 
+
+    @GetMapping(value = "/")
+    public String homePage() {
+        return "login";
+    }
+
     @GetMapping(value = "/admin")
     public String adminPage(ModelMap model) {
         model.addAttribute("user", getPrincipal());
