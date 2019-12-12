@@ -22,8 +22,6 @@
                     ${lit.casualLinks}
                 </c:forEach>
             </td>
-
-
         </tr>
     </c:forEach>
 </table>

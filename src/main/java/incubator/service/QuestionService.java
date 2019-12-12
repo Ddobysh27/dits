@@ -35,4 +35,20 @@ public class QuestionService {
         return str;
     }
 
+    public Question getQuestionByDescription(String description) {
+        Question question = new Question();
+        List<Question> questions = questionRepository.findAll(Question.class, questionRepository.getBeanToBeAutowired());
+        if (questions.toString().contains(description)) {
+            for (Question quest : questions
+            ) {
+                if (quest.getDescription().equals(description)) {
+                    question = quest;
+                }
+            }
+        } else {
+            System.out.println("Всё плохо, вопроса в таким описанием нет в БД");
+        }
+        return question;
+    }
+
 }

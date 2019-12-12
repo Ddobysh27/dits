@@ -33,6 +33,12 @@ public class Answer {
                 '}';
     }
 
+    public int ifCorrect() {
+        if (correct) {
+            return 1;
+        } else return 0;
+    }
+
     public int getAnswerId() {
         return answerId;
     }

@@ -5,15 +5,13 @@
 <html>
 <body>
 
-<form action="/nextTestPage">
+<form action="/nextTestPage" method="get">
 
     <div> ${question} </div>
-    <br> <br>
+    <br>
     <c:forEach items="${answers}" var="answer">
-        <input type="radio" name="${question}" value="${answer}"> ${answer}<br>
+        <input type="radio" name="choosenAns" value="${answer}"> ${answer}<br>
     </c:forEach>
-
-
     <br>
     <input type="submit" value="Следующий">
 </form>

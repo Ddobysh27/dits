@@ -2,10 +2,9 @@ package incubator.controller.user;
 
 
 import incubator.model.Question;
+import incubator.model.Statistic;
 import incubator.model.Test;
-import incubator.service.QuestionService;
-import incubator.service.TestService;
-import incubator.service.UserService;
+import incubator.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +13,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -27,6 +28,12 @@ public class TestPageController {
 
     @Autowired
     QuestionService questionService;
+
+    @Autowired
+    StatisticService statisticService;
+
+    @Autowired
+    AnswerService answerService;
 
     private static Test test;
     private static List<Question> questionList;
@@ -47,8 +54,17 @@ public class TestPageController {
     }
 
     @GetMapping(value = "/nextTestPage")
-    public String nextTestPage1(ModelMap modelMap) {
+    public String nextTestPage1(@RequestParam(value = "choosenAns") String choosenAnswer, ModelMap modelMap) {
         if (counter < max) {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            Statistic statistic = new Statistic();
+
+            statistic.setCorrect(answerService.getAnswerByDescription(choosenAnswer).ifCorrect());
+            statistic.setDate(formatter.format(new Date()));
+            statistic.setQuestion(questionList.get(counter - 1));
+            statistic.setUser(userService.getUserByUsername(getPrincipal()));
+            statisticService.save(statistic);
+
             modelMap.addAttribute("question", questionList.get(counter).getDescription());
             modelMap.addAttribute("answers", questionService.getAnswersByQuestion(questionList.get(counter).getDescription()));
             counter++;
