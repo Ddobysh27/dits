@@ -1,6 +1,10 @@
 package incubator.controller.user;
 
 
+import incubator.model.Question;
+import incubator.model.Test;
+import incubator.service.QuestionService;
+import incubator.service.TestService;
 import incubator.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -8,6 +12,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class TestPageController {
@@ -15,11 +22,35 @@ public class TestPageController {
     @Autowired
     UserService userService;
 
-    private static int counter = 0;
+    @Autowired
+    TestService testService;
 
-    @GetMapping(value = "/nextTestPage1")
+    @Autowired
+    QuestionService questionService;
+
+    private static Test test;
+    private static List<Question> questionList;
+    private static int max;
+    private static int counter;
+
+    @GetMapping(value = "/goTest")
+    public String goTest(@RequestParam String testName, ModelMap modelMap) {
+        test = testService.getTestByName(testName);
+        questionList = testService.getQuestionsByTest(testName);
+        max = questionList.size();
+        counter = 0;
+
+        modelMap.addAttribute("question", questionList.get(counter).getDescription());
+        modelMap.addAttribute("answers", questionService.getAnswersByQuestion(questionList.get(counter).getDescription()));
+        counter++;
+        return "User/testPage";
+    }
+
+    @GetMapping(value = "/nextTestPage")
     public String nextTestPage1(ModelMap modelMap) {
-        if (counter < 3) {
+        if (counter < max) {
+            modelMap.addAttribute("question", questionList.get(counter).getDescription());
+            modelMap.addAttribute("answers", questionService.getAnswersByQuestion(questionList.get(counter).getDescription()));
             counter++;
             return "User/testPage";
         } else

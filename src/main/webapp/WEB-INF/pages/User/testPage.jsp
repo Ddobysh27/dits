@@ -1,22 +1,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <body>
 
-<form action="/nextTestPage1">
+<form action="/nextTestPage">
+
+    <div> ${question} </div>
+    <br> <br>
+    <c:forEach items="${answers}" var="answer">
+        <input type="radio" name="${question}" value="${answer}"> ${answer}<br>
+    </c:forEach>
 
 
-<input type="text" placeholder="Вопрос">
-<br> <br>
-<input type="text" placeholder="1.Ответ"><br>
-<input type="text" placeholder="2.Ответ"><br>
-<input type="text" placeholder="3.Ответ"><br>
-<input type="text" placeholder="4.Ответ"><br> <br>
+    <br>
     <input type="submit" value="Следующий">
 </form>
 
-<a href="<c:url value="/logout" />">выйти</a>
+<a href="<c:url value="/logout" />">Выйти</a>
 </body>
 </html>

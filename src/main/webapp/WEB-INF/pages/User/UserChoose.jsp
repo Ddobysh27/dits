@@ -17,8 +17,8 @@
     </select>
 
     <br>
-        <select id="tests" name="test">
-            <option>Выберите тему</option>
+        <select id="tests" name="testName">
+            <option>Выберите тест</option>
             <option></option>
         </select>
     </div>
