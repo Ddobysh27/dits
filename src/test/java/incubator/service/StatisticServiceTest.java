@@ -52,7 +52,7 @@ public class StatisticServiceTest extends AbstractTestNGSpringContextTests {
         statistic.setQuestion(questionService.getQuestionByDescription("First question"));
         statistic.setUser(userService.getUserByUsername("GavinBelson"));
 
-        statisticService.save(statistic);
+        statisticService.testMethod(statistic);
 
     }
 

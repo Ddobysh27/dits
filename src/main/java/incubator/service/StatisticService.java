@@ -47,4 +47,15 @@ public class StatisticService {
         statisticRepository.save(statistic, statisticRepository.getBeanToBeAutowired());
     }
 
+
+    @Transactional
+    public void create(Statistic statistic) {
+        statisticRepository.create(statistic);
+    }
+
+    @Transactional
+    public void testMethod(Statistic statistic) {
+        statisticRepository.updateTestMethod(statistic);
+    }
+
 }
