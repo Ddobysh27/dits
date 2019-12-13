@@ -20,11 +20,9 @@ public class User {
     private String login;
     @Column
     private int password;
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "roleId")
     private Role role;
-
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Statistic> statistics;
@@ -61,6 +59,25 @@ public class User {
         } else {
             return "TUTOR";
         }
+    }
+
+    public void setNormanRole(String role) {
+
+
+        if (role.contains("admin") || role.contains("ADMIN")) {
+            this.role.setAdmin(1);
+            this.role.setUser(0);
+            this.role.setTutor(0);
+        } else if (role.contains("user") || role.contains("USER")) {
+            this.role.setAdmin(0);
+            this.role.setUser(1);
+            this.role.setTutor(0);
+        } else {
+            this.role.setAdmin(0);
+            this.role.setUser(0);
+            this.role.setTutor(1);
+        }
+
     }
 
     public List<Statistic> getStatistics() {
