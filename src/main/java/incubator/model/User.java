@@ -27,6 +27,8 @@ public class User {
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Statistic> statistics;
 
+    private String nameRole;
+
 
     @Override
     public String toString() {
@@ -48,10 +50,18 @@ public class User {
         this.role = role;
     }
 
+    public User(String firstName, String lastName, String login, int password, String nameRole) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.login = login;
+        this.password = password;
+        this.role = setRoleByNameRole(nameRole);
+    }
+
     public User() {
     }
 
-    public String getNormanRole() {
+    public String getStringNameRole() {
         if (role.getAdmin() == 1) {
             return "ADMIN";
         } else if (role.getUser() == 1) {
@@ -61,22 +71,20 @@ public class User {
         }
     }
 
-    public void setNormanRole(String role) {
+    public Role setRoleByNameRole(String nameRole) {
+        Role roleByNameRole = new Role(0,0,0);
 
-
-        if (role.contains("admin") || role.contains("ADMIN")) {
-            this.role.setAdmin(1);
-            this.role.setUser(0);
-            this.role.setTutor(0);
-        } else if (role.contains("user") || role.contains("USER")) {
-            this.role.setAdmin(0);
-            this.role.setUser(1);
-            this.role.setTutor(0);
+        if (nameRole.contains("admin") || nameRole.contains("ADMIN")) {
+            roleByNameRole.setRoleId(3);
+            roleByNameRole.setAdmin(1);
+        } else if (nameRole.contains("user") || nameRole.contains("USER")) {
+            roleByNameRole.setRoleId(1);
+            roleByNameRole.setUser(1);
         } else {
-            this.role.setAdmin(0);
-            this.role.setUser(0);
-            this.role.setTutor(1);
+            roleByNameRole.setRoleId(1);
+            roleByNameRole.setTutor(1);
         }
+        return roleByNameRole;
 
     }
 
@@ -135,6 +143,14 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String  getNameRole() {
+        return nameRole;
+    }
+
+    public void setNameRole(String nameRole){
+        this.nameRole = nameRole;
     }
 
 }

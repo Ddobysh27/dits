@@ -6,6 +6,7 @@ import incubator.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,34 +21,34 @@ public class CreateUserService {
     @Autowired
     RoleService roleService;
 
-//    private static String[] allRoles = {"User", "Tutor", "Admin"};
-//    private static String[] allRoles = {"user", "tutor", "admin"};
+    private static String[] allRoles = {"USER", "TUTOR", "ADMIN"};
 
-//    public static String[] getAllRoles() {
-//        return allRoles;
+    public static String[] getAllRoles() {
+        return allRoles;
+    }
+
+//    private static List<Role> allRolesListObject = new ArrayList<Role>();
+//
+//    public static List<Role> getAllRolesListObject() {
+//        Role user = new Role(1,0,0);
+//        Role tutor = new Role(0,1,0);
+//        Role admin = new Role(0,0,1);
+//        allRolesListObject.add(user);
+//        allRolesListObject.add(tutor);
+//        allRolesListObject.add(admin);
+//
+//        return allRolesListObject;
 //    }
 
-    private static List<Role> allRolesListObject = new ArrayList<Role>();
-
-    public static List<Role> getAllRolesListObject() {
-        Role user = new Role(1,0,0);
-        Role tutor = new Role(0,1,0);
-        Role admin = new Role(0,0,1);
-        allRolesListObject.add(user);
-        allRolesListObject.add(tutor);
-        allRolesListObject.add(admin);
-
-        return allRolesListObject;
-    }
-
-
-    public void сreateUser(User user) {
-//        Role role =  roleService.createRole(user.);
-        Role role = user.getRole();
-        //user.setNormanRole();
+    @Transactional
+    public void сreateUser(User user, String nameRole) {
+        user.setRole(roleService.createRole(nameRole));
         userRepository.create(user);
-
     }
 
+//    @Transactional
+//    public boolean ifExistsUserWithLogin(String login) {
+//        return userRepository.ifExistsUserWithLogin(login);
+//    }
 
 }
