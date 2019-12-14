@@ -12,6 +12,27 @@
 </head>
 <body>
 
+<form >
+    <input list="browsers">
+    <datalist id="browsers">
+        <option value="Internet Explorer">
+        <option value="Firefox">
+        <option value="Chrome">
+        <option value="Opera">
+        <option value="Safari">
+    </datalist>
 
+    <p><select name="select" size="3" multiple>
+        <option value="s1">1</option>
+        <option value="s2">2</option>
+        <option value="s3">3</option>
+        <option value="s4">4</option>
+    </select>
+        <input type="submit" value="Отправить"></p>
+</form>
+
+<form action="/goHomeAdmin">
+    <input type="submit" value="Назад">
+</form>
 </body>
 </html>
