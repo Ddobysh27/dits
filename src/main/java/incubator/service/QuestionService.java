@@ -16,13 +16,13 @@ public class QuestionService {
     @Autowired
     QuestionRepository questionRepository;
 
-    public List<String> getAnswersByQuestion(String questionDescription) {
+    public List<String> getAnswersByQuestion(int questionId) {
         List<Question> questions = questionRepository.findAll(Question.class, questionRepository.getBeanToBeAutowired());
         List<String> str = new ArrayList<>();
 
-        if (questions.toString().contains(questionDescription)) {
+        if (questionId >= 0 && questionId <= questions.size()) {
             for (Question question : questions) {
-                if (question.getDescription().equals(questionDescription)) {
+                if (question.getQuestionId() == questionId) {
                     for (Answer answer : question.getAnswers()
                     ) {
                         str.add(answer.getDescription());

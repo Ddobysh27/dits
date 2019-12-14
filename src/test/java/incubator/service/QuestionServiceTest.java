@@ -27,7 +27,7 @@ public class QuestionServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void showAll() {
-        for (String str : questionService.getAnswersByQuestion("First question")
+        for (String str : questionService.getAnswersByQuestion(1)
         ) {
             System.out.println(str);
         }

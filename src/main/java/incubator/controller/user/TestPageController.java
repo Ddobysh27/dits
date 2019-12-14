@@ -48,7 +48,7 @@ public class TestPageController {
         counter = 0;
 
         modelMap.addAttribute("question", questionList.get(counter).getDescription());
-        modelMap.addAttribute("answers", questionService.getAnswersByQuestion(questionList.get(counter).getDescription()));
+        modelMap.addAttribute("answers", questionService.getAnswersByQuestion(questionList.get(counter).getQuestionId()));
         counter++;
         return "User/testPage";
     }
@@ -56,17 +56,18 @@ public class TestPageController {
     @GetMapping(value = "/nextTestPage")
     public String nextTestPage1(@RequestParam(value = "choosenAns") String choosenAnswer, ModelMap modelMap) {
         if (counter < max) {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        /*    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Statistic statistic = new Statistic();
 
             statistic.setCorrect(answerService.getAnswerByDescription(choosenAnswer).ifCorrect());
             statistic.setDate(formatter.format(new Date()));
             statistic.setQuestion(questionList.get(counter - 1));
             statistic.setUser(userService.getUserByUsername(getPrincipal()));
-            statisticService.save(statistic);
+            statisticService.save(statistic);*/
 
             modelMap.addAttribute("question", questionList.get(counter).getDescription());
-            modelMap.addAttribute("answers", questionService.getAnswersByQuestion(questionList.get(counter).getDescription()));
+            modelMap.addAttribute("answers", questionService.getAnswersByQuestion(questionList.get(counter).getQuestionId()));
             counter++;
             return "User/testPage";
         } else

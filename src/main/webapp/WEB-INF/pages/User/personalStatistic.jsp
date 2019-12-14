@@ -7,21 +7,19 @@
 
 <table border="2">
     <tr>
-        <th>Название вопроса</th>
-        <th>Правильно</th>
-        <th>Рекомендуемая литература</th>
-        <th>Рекомендуемые ссылки на литературу</th>
+        <th>Ф.И.О.</th>
+        <th>Название теста</th>
+        <th>Формулировка вопроса</th>
+        <th>Пройдено всего</th>
+        <th>Процент правильно пройденных вопросов</th>
     </tr>
     <c:forEach items="${statistic}" var="item">
         <tr>
+            <td> ${item.user.getFIO(item.user)} </td>
+            <td> ${item.question.test.name} </td>
             <td> ${item.question.description} </td>
-            <td> ${item.correct} </td>
-            <td> ${item.question.literatures} </td>
-            <td>
-                <c:forEach items="${item.question.literatureList}" var="lit">
-                    ${lit.casualLinks}
-                </c:forEach>
-            </td>
+            <td> Пройдено всего? </td>
+            <td> Процент правильно пройденных вопросов? </td>
         </tr>
     </c:forEach>
 </table>
