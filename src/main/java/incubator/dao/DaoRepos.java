@@ -1,6 +1,7 @@
 package incubator.dao;
 
 
+import incubator.model.Statistic;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +32,10 @@ public interface DaoRepos<T> {
     default List<T> findAll(Class T, SessionFactory sessionFactory) {
         List<T> tlist = (List<T>) sessionFactory.openSession().createQuery("From " + T.getSimpleName()).list();
         return tlist;
+    }
+
+    default void testingCreateMethod(T t, SessionFactory sessionFactory) {
+        sessionFactory.getCurrentSession().merge(t);
     }
 
 }

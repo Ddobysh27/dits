@@ -53,8 +53,12 @@ public class StatisticService {
     }
 
     @Transactional
-    public void testMethod(Statistic statistic) {
-        statisticRepository.updateTestMethod(statistic);
+    public void testingCreateMethod(Statistic statistic) {
+        statisticRepository.testingCreateMethod(statistic, statisticRepository.getBeanToBeAutowired());
+    }
+
+    public List<Statistic> selectUserTestStatistic(String userId, String start, String end) {
+         return statisticRepository.personalUserTestStatistic(userId, start, end);
     }
 
 }

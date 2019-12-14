@@ -24,6 +24,18 @@ public class UserService {
         return usernames;
     }
 
+    public User getUserByUserId(int inUserId) {
+        User outUser = new User();
+        if (inUserId >= 1 && inUserId <= getUsernames().size()) {
+            for (User user : userRepository.findAll(User.class, userRepository.getBeanToBeAutowired())
+            ) {
+                if (user.getUserId() == inUserId) outUser = user;
+            }
+        } else {
+            System.out.println("Пользователь с таким ID не найден в базе");
+        }
+        return outUser;
+    }
 
     public User getUserByUsername(String username) {
         User outUser = new User();
