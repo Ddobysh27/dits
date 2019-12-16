@@ -4,7 +4,7 @@ import incubator.config.HibernateConfig;
 import incubator.config.WebConfig;
 import incubator.dao.AnswerRepository;
 import incubator.model.Answer;
-import incubator.model.Statistic;
+import incubator.model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
@@ -13,9 +13,6 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.testng.annotations.Test;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import static org.testng.Assert.*;
 
 @ComponentScan(basePackages = "incubator")
@@ -23,37 +20,23 @@ import static org.testng.Assert.*;
 @WebAppConfiguration
 @PropertySource("classpath:db.properties")
 @PropertySource(value = "classpath:hibernate.properties")
-public class StatisticServiceTest extends AbstractTestNGSpringContextTests {
+public class TestServiceTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
-    private StatisticService statisticService;
-
-    @Autowired
-    QuestionService questionService;
-
-    @Autowired
-    UserService userService;
+    private TestService testService;
 
     @Test
     public void showAll() {
-        for (int i = 1; i < 6; i++) {
-            statisticService.userStatistic(i);
+        for (Question question : testService.getQuestionsByTest("First test")
+        ) {
+            System.out.println(question);
         }
     }
 
-
     @Test
-    public void save() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Statistic statistic = new Statistic();
-
-        statistic.setCorrect(1);
-        statistic.setDate(formatter.format(new Date()));
-        statistic.setQuestion(questionService.getQuestionByDescription("First question"));
-        statistic.setUser(userService.getUserByUsername("GavinBelson"));
-
-        statisticService.testMethod(statistic);
-
+    public void testByName() {
+        System.out.println(testService.getTestByName("First test"));
     }
+
 
 }

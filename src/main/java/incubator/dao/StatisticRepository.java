@@ -15,4 +15,10 @@ public class StatisticRepository implements DaoRepos<Statistic> {
     public SessionFactory getBeanToBeAutowired() {
         return sessionFactory;
     }
+
+
+    public void updateTestMethod(Statistic book) {
+        sessionFactory.getCurrentSession().merge(book);
+    }
+
 }

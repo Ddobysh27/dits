@@ -3,6 +3,7 @@ package incubator.dao;
 
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface DaoRepos<T> {
     }
 
     default void update(T t, SessionFactory sessionFactory) {
-        sessionFactory.openSession().update(t);
+        sessionFactory.getCurrentSession().update(t);
     }
 
     default void delete(T t, SessionFactory sessionFactory) {

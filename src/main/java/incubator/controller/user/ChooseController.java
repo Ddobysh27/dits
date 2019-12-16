@@ -1,21 +1,26 @@
 package incubator.controller.user;
 
 
-import incubator.controller.HomeController;
+import incubator.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller
 public class ChooseController {
 
-    @GetMapping(value = "/goTest")
-    public String goTest() {
-        return "User/testPage";
-    }
+    @Autowired
+    TopicService topicService;
 
+    @RequestMapping(value = "/UserChoose", method = RequestMethod.GET)
+    @ResponseBody
+    public List<String> l(@RequestParam(value = "topic", required = false) String topic) {
+        return topicService.getTestsByTopic(topic);
+    }
 
 }
