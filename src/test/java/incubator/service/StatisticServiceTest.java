@@ -3,8 +3,10 @@ package incubator.service;
 import incubator.config.HibernateConfig;
 import incubator.config.WebConfig;
 import incubator.dao.AnswerRepository;
+import incubator.dao.StatisticRepository;
 import incubator.model.Answer;
 import incubator.model.Statistic;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
@@ -13,6 +15,7 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.testng.annotations.Test;
 
+import javax.persistence.Query;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -32,6 +35,9 @@ public class StatisticServiceTest extends AbstractTestNGSpringContextTests {
     QuestionService questionService;
 
     @Autowired
+    StatisticRepository statisticRepository;
+
+    @Autowired
     UserService userService;
 
     @Test
@@ -41,19 +47,40 @@ public class StatisticServiceTest extends AbstractTestNGSpringContextTests {
         }
     }
 
+    @Test
+    public void fastTest() {
+        System.out.println(getClass().getResourceAsStream("db.prorperties"));
+    }
+
+
 
     @Test
     public void save() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
         Statistic statistic = new Statistic();
-
         statistic.setCorrect(1);
         statistic.setDate(formatter.format(new Date()));
-        statistic.setQuestion(questionService.getQuestionByDescription("First question"));
+        statistic.setQuestion(questionService.getQuestionById(1));
         statistic.setUser(userService.getUserByUsername("GavinBelson"));
+        statisticService.testingCreateMethod(statistic);
+    }
 
-        statisticService.testMethod(statistic);
+    @Test
+    public void statisticTest() {
+        for (Statistic st : statisticRepository.personalUserTestStatistic("1", "2019-12-14 11:44:00", "2019-12-14 11:44:08")
+        ) {
+            System.out.println(st);
+        }
+    }
 
+    @Test
+    public void userStatisticTest() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.print(statisticRepository.personalUserStatistic(1)[i][j]);
+            }
+            System.out.println(" ");
+        }
     }
 
 }

@@ -81,4 +81,43 @@ public class Statistic {
     public void setQuestion(Question question) {
         this.question = question;
     }
+
+
+    public static class Builder {
+        private Statistic statistic;
+
+        public Builder() {
+            statistic = new Statistic();
+        }
+
+        public Builder withDate(String date) {
+            statistic.date = date;
+            return this;
+        }
+
+        public Builder withId(int id) {
+            statistic.statisticId = id;
+            return this;
+        }
+
+        public Builder withCorrect(int correct) {
+            statistic.correct = correct;
+            return this;
+        }
+
+        public Builder withQuestion(Question question) {
+            statistic.question = question;
+            return this;
+        }
+
+        public Builder withUser(User user) {
+            statistic.user = user;
+            return this;
+        }
+
+        public Statistic create() {
+            return statistic;
+        }
+
+    }
 }

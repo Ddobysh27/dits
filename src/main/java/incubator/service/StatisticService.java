@@ -2,7 +2,6 @@ package incubator.service;
 
 import incubator.dao.StatisticRepository;
 import incubator.model.Statistic;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,8 +53,12 @@ public class StatisticService {
     }
 
     @Transactional
-    public void testMethod(Statistic statistic) {
-        statisticRepository.updateTestMethod(statistic);
+    public void testingCreateMethod(Statistic statistic) {
+        statisticRepository.testingCreateMethod(statistic, statisticRepository.getBeanToBeAutowired());
+    }
+
+    public List<Statistic> selectUserTestStatistic(String userId, String start, String end) {
+         return statisticRepository.personalUserTestStatistic(userId, start, end);
     }
 
 }

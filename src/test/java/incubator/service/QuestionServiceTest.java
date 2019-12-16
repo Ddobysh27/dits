@@ -27,10 +27,18 @@ public class QuestionServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void showAll() {
-        for (String str : questionService.getAnswersByQuestion("First question")
+        for (String str : questionService.getAnswersByQuestion(1)
         ) {
             System.out.println(str);
         }
     }
+
+    @Test
+    public void getQuestionById() {
+        for (int i = 1; i <= questionService.questionRepository.findAll(Question.class, questionService.questionRepository.getBeanToBeAutowired()).size(); i++) {
+            System.out.println(questionService.getQuestionById(i));
+        }
+    }
+
 
 }

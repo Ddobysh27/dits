@@ -39,6 +39,8 @@ public class TestPageController {
     private static List<Question> questionList;
     private static int max;
     private static int counter;
+    private static String startTest;
+    private static String endTest;
 
     @GetMapping(value = "/goTest")
     public String goTest(@RequestParam String testName, ModelMap modelMap) {
@@ -46,9 +48,11 @@ public class TestPageController {
         questionList = testService.getQuestionsByTest(testName);
         max = questionList.size();
         counter = 0;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+        startTest = formatter.format(new Date());
 
         modelMap.addAttribute("question", questionList.get(counter).getDescription());
-        modelMap.addAttribute("answers", questionService.getAnswersByQuestion(questionList.get(counter).getDescription()));
+        modelMap.addAttribute("answers", questionService.getAnswersByQuestion(questionList.get(counter).getQuestionId()));
         counter++;
         return "User/testPage";
     }
@@ -56,26 +60,42 @@ public class TestPageController {
     @GetMapping(value = "/nextTestPage")
     public String nextTestPage1(@RequestParam(value = "choosenAns") String choosenAnswer, ModelMap modelMap) {
         if (counter < max) {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+            endTest = formatter.format(new Date());
             Statistic statistic = new Statistic();
 
             statistic.setCorrect(answerService.getAnswerByDescription(choosenAnswer).ifCorrect());
             statistic.setDate(formatter.format(new Date()));
             statistic.setQuestion(questionList.get(counter - 1));
             statistic.setUser(userService.getUserByUsername(getPrincipal()));
-            statisticService.save(statistic);
+            statisticService.testingCreateMethod(statistic);
 
             modelMap.addAttribute("question", questionList.get(counter).getDescription());
-            modelMap.addAttribute("answers", questionService.getAnswersByQuestion(questionList.get(counter).getDescription()));
+            modelMap.addAttribute("answers", questionService.getAnswersByQuestion(questionList.get(counter).getQuestionId()));
             counter++;
             return "User/testPage";
         } else
-            return resultPageFill(modelMap);
+            return resultPageFill(choosenAnswer, modelMap);
     }
 
     @GetMapping(value = "/resultPage")
-    public String resultPageFill(ModelMap modelMap) {
-        modelMap.addAttribute("statistic", userService.getUserByUsername(getPrincipal()).getStatistics());
+    public String resultPageFill(String choosenAnswer, ModelMap modelMap) {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+        endTest = formatter.format(new Date());
+        Statistic statistic = new Statistic();
+
+        statistic.setCorrect(answerService.getAnswerByDescription(choosenAnswer).ifCorrect());
+        statistic.setDate(formatter.format(new Date()));
+        statistic.setQuestion(questionList.get(counter - 1));
+        statistic.setUser(userService.getUserByUsername(getPrincipal()));
+        statisticService.testingCreateMethod(statistic);
+
+        modelMap.addAttribute("statistic", statisticService.selectUserTestStatistic(
+                "" + userService.getUserByUsername(getPrincipal()).getUserId(),
+                "" + startTest,
+                "" + endTest
+        ));
         return "User/resultPage";
     }
 
