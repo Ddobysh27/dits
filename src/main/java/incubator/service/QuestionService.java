@@ -51,4 +51,20 @@ public class QuestionService {
         return question;
     }
 
+    public List<Question> getAllQuestions() {
+        return questionRepository.findAll(Question.class, questionRepository.getBeanToBeAutowired());
+    }
+
+    public List<String> getNamesQuestions(){
+        List<String> namesTopics = new ArrayList<>();
+        for (Question q : questionRepository.findAll(Question.class, questionRepository.getBeanToBeAutowired())
+        ) {
+            namesTopics.add(q.getDescription());
+        }
+        return namesTopics;
+    }
+
+
+
+
 }

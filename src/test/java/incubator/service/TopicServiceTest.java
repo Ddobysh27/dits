@@ -1,4 +1,4 @@
-package incubator.dao;
+package incubator.service;
 
 import incubator.config.HibernateConfig;
 import incubator.config.WebConfig;
@@ -11,24 +11,23 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.testng.annotations.Test;
 
-
+import static org.testng.Assert.*;
 @ComponentScan(basePackages = "incubator")
 @ContextConfiguration(classes = {WebConfig.class, HibernateConfig.class})
 @WebAppConfiguration
 @PropertySource("classpath:db.properties")
 @PropertySource(value = "classpath:hibernate.properties")
-public class TopicRepositoryTest extends AbstractTestNGSpringContextTests{
+public class TopicServiceTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
-    private TopicRepository topicRepository;
+    TopicService topicService;
 
     @Test
-    public void showAll() {
-        System.out.println(topicRepository.findAll(Topic.class, topicRepository.getBeanToBeAutowired()));
-        for (Topic q : topicRepository.findAll(Topic.class, topicRepository.getBeanToBeAutowired())
-        ) {
-            System.out.println(q);
+    public void testGetTopics() {
+        for (Topic t: topicService.getTopics()
+             ) {
+            System.out.println(t);
+
         }
     }
-
 }

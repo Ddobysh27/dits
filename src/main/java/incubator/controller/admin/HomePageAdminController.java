@@ -12,10 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class HomePageAdminController {
 
-    @GetMapping(value = "/createTest")
-    public String createTest() {
-        return "Admin/createTest";
-    }
 
     @GetMapping(value = "/adminStatistic")
     public String showStatisticPage() {

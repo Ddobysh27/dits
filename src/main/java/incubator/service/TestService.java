@@ -51,4 +51,14 @@ public class TestService {
         return str;
     }
 
+    public List<String> getNamesTests(){
+        List<String> namesTopics = new ArrayList<>();
+        for (Test t : testRepository.findAll(Test.class, testRepository.getBeanToBeAutowired())
+        ) {
+            namesTopics.add(t.getName());
+        }
+        return namesTopics;
+    }
+
+
 }

@@ -29,6 +29,7 @@ public class User {
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Statistic> statistics;
 
+    private String nameRole;
 
     @Override
     public String toString() {
@@ -48,6 +49,14 @@ public class User {
         this.login = login;
         this.password = password;
         this.role = role;
+    }
+
+    public User(String firstName, String lastName, String login, int password, String nameRole) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.login = login;
+        this.password = password;
+        this.role = setRoleByNameRole(nameRole);
     }
 
     public User() {
@@ -73,6 +82,23 @@ public class User {
 
     public List<Statistic> getStatistics() {
         return statistics;
+    }
+
+    public Role setRoleByNameRole(String nameRole) {
+        Role roleByNameRole = new Role(0,0,0);
+
+        if (nameRole.contains("admin") || nameRole.contains("ADMIN")) {
+            roleByNameRole.setRoleId(3);
+            roleByNameRole.setAdmin(1);
+        } else if (nameRole.contains("user") || nameRole.contains("USER")) {
+            roleByNameRole.setRoleId(1);
+            roleByNameRole.setUser(1);
+        } else {
+            roleByNameRole.setRoleId(1);
+            roleByNameRole.setTutor(1);
+        }
+        return roleByNameRole;
+
     }
 
     public void setStatistics(List<Statistic> statistics) {
@@ -126,6 +152,14 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String  getNameRole() {
+        return nameRole;
+    }
+
+    public void setNameRole(String nameRole){
+        this.nameRole = nameRole;
     }
 
 }

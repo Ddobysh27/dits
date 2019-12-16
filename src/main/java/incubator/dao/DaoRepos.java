@@ -33,5 +33,9 @@ public interface DaoRepos<T> {
         return tlist;
     }
 
+    default List<T> findAllCurrent(Class T, SessionFactory sessionFactory) {
+        List<T> tlist = (List<T>) sessionFactory.getCurrentSession().createQuery("from" + T.getSimpleName()).list();
+        return tlist;
+    }
 }
 

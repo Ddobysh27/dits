@@ -1,5 +1,6 @@
 package incubator.service;
 
+
 import incubator.config.HibernateConfig;
 import incubator.config.WebConfig;
 import incubator.dao.AnswerRepository;
@@ -32,5 +33,17 @@ public class QuestionServiceTest extends AbstractTestNGSpringContextTests {
             System.out.println(str);
         }
     }
+
+    @Test
+    public void showAllQuestion() {
+        for (Question q : questionService.getAllQuestions()
+        ) {
+            System.out.println(q);
+        }
+
+    }
+
+
+
 
 }

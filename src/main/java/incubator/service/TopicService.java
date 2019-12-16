@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class TopicService {
@@ -37,5 +39,17 @@ public class TopicService {
         }
         return str;
     }
+
+    public List<String> getNamesTopics(){
+        List<String> namesTopicsL = new ArrayList<>();
+
+        for (Topic t : topicRepository.findAll(Topic.class, topicRepository.getBeanToBeAutowired())
+             ) {
+            namesTopicsL.add(t.getName());
+        }
+
+        return namesTopicsL;
+    }
+
 
 }

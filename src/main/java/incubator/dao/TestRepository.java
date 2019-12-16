@@ -21,7 +21,7 @@ public class TestRepository implements DaoRepos<Test> {
     public double testsDifficulty(int x) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/managementsystem", "root", "123qwe");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/managementsystem", "root", "root1");
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select   testdifficulty("+x+")");
             while (rs.next()) {
