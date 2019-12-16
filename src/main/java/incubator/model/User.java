@@ -29,7 +29,6 @@ public class User {
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Statistic> statistics;
 
-
     @Override
     public String toString() {
         return "User{" +
@@ -63,7 +62,6 @@ public class User {
         }
     }
 
-
     public String getFIO(User user) {
         String str = "";
         str += user.getFirstName() + "\n";
@@ -78,7 +76,6 @@ public class User {
     public void setStatistics(List<Statistic> statistics) {
         this.statistics = statistics;
     }
-
 
     public int getUserId() {
         return userId;

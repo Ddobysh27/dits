@@ -18,6 +18,7 @@ import org.testng.annotations.Test;
 import javax.persistence.Query;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import static org.testng.Assert.*;
 
@@ -53,7 +54,6 @@ public class StatisticServiceTest extends AbstractTestNGSpringContextTests {
     }
 
 
-
     @Test
     public void save() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
@@ -75,11 +75,10 @@ public class StatisticServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void userStatisticTest() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                System.out.print(statisticRepository.personalUserStatistic(1)[i][j]);
-            }
-            System.out.println(" ");
+        List<QuestionStatModel> list = statisticRepository.personalUserStatistic(1);
+        for (QuestionStatModel qsm: list
+        ) {
+            System.out.println(qsm);
         }
     }
 

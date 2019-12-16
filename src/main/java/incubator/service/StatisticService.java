@@ -1,12 +1,14 @@
 package incubator.service;
 
 import incubator.dao.StatisticRepository;
+import incubator.model.Question;
 import incubator.model.Statistic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -41,15 +43,9 @@ public class StatisticService {
         System.out.println("Рейтинг пользователя " + list.get(var).getUser().getFirstName() + " - " + userRate + "%");
     }
 
-    @Transactional
-    public void save(Statistic statistic) {
-        statisticRepository.save(statistic, statisticRepository.getBeanToBeAutowired());
-    }
 
-
-    @Transactional
-    public void create(Statistic statistic) {
-        statisticRepository.create(statistic);
+    public List<QuestionStatModel> getStatList(int userId) {
+        return statisticRepository.personalUserStatistic(userId);
     }
 
     @Transactional
@@ -58,7 +54,9 @@ public class StatisticService {
     }
 
     public List<Statistic> selectUserTestStatistic(String userId, String start, String end) {
-         return statisticRepository.personalUserTestStatistic(userId, start, end);
+        return statisticRepository.personalUserTestStatistic(userId, start, end);
     }
 
 }
+
+

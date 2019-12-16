@@ -3,6 +3,8 @@ package incubator.controller.user;
 
 import incubator.model.Statistic;
 import incubator.model.User;
+import incubator.service.QuestionStatModel;
+import incubator.service.SortByQuestionId;
 import incubator.service.StatisticService;
 import incubator.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -20,6 +23,9 @@ public class StatisticPageController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    StatisticService statisticService;
+
     @GetMapping(value = "/goUserHome")
     public String goHome() {
         return "User/user";
@@ -27,7 +33,9 @@ public class StatisticPageController {
 
     @GetMapping(value = "/personalStatistic")
     public String resultPageFill(ModelMap modelMap) {
-        modelMap.addAttribute("statistic", userService.getUserByUsername(getPrincipal()).getStatistics());
+        List<QuestionStatModel> varList = statisticService.getStatList(userService.getUserByUsername(getPrincipal()).getUserId());
+        Collections.sort(varList, new SortByQuestionId());
+        modelMap.addAttribute("statistic", varList);
         return "User/personalStatistic";
     }
 

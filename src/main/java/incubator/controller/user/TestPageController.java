@@ -61,7 +61,6 @@ public class TestPageController {
     public String nextTestPage1(@RequestParam(value = "choosenAns") String choosenAnswer, ModelMap modelMap) {
         if (counter < max) {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
-            endTest = formatter.format(new Date());
             Statistic statistic = new Statistic();
 
             statistic.setCorrect(answerService.getAnswerByDescription(choosenAnswer).ifCorrect());
@@ -82,7 +81,6 @@ public class TestPageController {
     public String resultPageFill(String choosenAnswer, ModelMap modelMap) {
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
-        endTest = formatter.format(new Date());
         Statistic statistic = new Statistic();
 
         statistic.setCorrect(answerService.getAnswerByDescription(choosenAnswer).ifCorrect());
@@ -90,6 +88,8 @@ public class TestPageController {
         statistic.setQuestion(questionList.get(counter - 1));
         statistic.setUser(userService.getUserByUsername(getPrincipal()));
         statisticService.testingCreateMethod(statistic);
+
+        endTest = formatter.format(new Date());
 
         modelMap.addAttribute("statistic", statisticService.selectUserTestStatistic(
                 "" + userService.getUserByUsername(getPrincipal()).getUserId(),

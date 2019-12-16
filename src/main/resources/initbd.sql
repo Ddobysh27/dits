@@ -1,81 +1,80 @@
-/*
-Use `managementsystem`;
+/*Use `managementsystem`;
 unlock tables;
 
 DROP DATABASE `managementsystem`;
 CREATE DATABASE `managementsystem`;
-USE `managementsystem`;	
+USE `managementsystem`;
 SET GLOBAL time_zone = '+3:00';
 
 CREATE TABLE `topic`(
-  `topicId` integer(10) PRIMARY KEY  NOT NULL AUTO_INCREMENT,
-  `description` varchar(100),
-  `name` varchar(20)
+`topicId` integer(10) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`description` varchar(100),
+`name` varchar(20)
 );
 
 CREATE TABLE `test`(
-  `testId` integer(10) PRIMARY KEY  NOT NULL AUTO_INCREMENT,
-  `name` varchar(20),
-  `description` varchar(100),
-  `topicId` integer(10) NOT NULL,
-  FOREIGN KEY (`topicId`) REFERENCES `topic` (`topicId`) ON DELETE CASCADE
+`testId` integer(10) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`name` varchar(20),
+`description` varchar(100),
+`topicId` integer(10) NOT NULL,
+FOREIGN KEY (`topicId`) REFERENCES `topic` (`topicId`) ON DELETE CASCADE
 );
 
 CREATE TABLE `question`(
-  `questionId` integer(10) PRIMARY KEY  NOT NULL AUTO_INCREMENT,
-  `description` varchar(100),
-  `testId` integer(10),
-    FOREIGN KEY (`testId`) REFERENCES `test` (`testId`) ON DELETE CASCADE
-  );
+`questionId` integer(10) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`description` varchar(100),
+`testId` integer(10),
+FOREIGN KEY (`testId`) REFERENCES `test` (`testId`) ON DELETE CASCADE
+);
 
 CREATE TABLE `answer`(
-  `answerId` integer(10) PRIMARY KEY  NOT NULL AUTO_INCREMENT,
-  `description` varchar(100),
-  `correct` tinyint(1),
-  `questionId` integer(10) NOT NULL,
-  FOREIGN KEY (`questionId`) REFERENCES `question` (`questionId`) ON DELETE CASCADE
+`answerId` integer(10) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`description` varchar(100),
+`correct` tinyint(1),
+`questionId` integer(10) NOT NULL,
+FOREIGN KEY (`questionId`) REFERENCES `question` (`questionId`) ON DELETE CASCADE
 );
 
 CREATE TABLE `role`(
-  `roleId` integer(10) PRIMARY KEY  NOT NULL AUTO_INCREMENT,
-  `user` binary(1) DEFAULT 0,
-  `tutor` binary(1) DEFAULT 0,
-  `admin` binary(1) DEFAULT 0
+`roleId` integer(10) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`user` binary(1) DEFAULT 0,
+`tutor` binary(1) DEFAULT 0,
+`admin` binary(1) DEFAULT 0
 );
 
 CREATE TABLE `user`(
-  `userId` integer(10) PRIMARY KEY  NOT NULL AUTO_INCREMENT,
-  `firstName` varchar(20),
-  `lastName` varchar(20),
-  `login` varchar(20),
-  `password` integer(10),
-  `roleId` integer(10) NOT NULL,
-  FOREIGN KEY (`roleId`) REFERENCES `role` (`roleId`) ON DELETE CASCADE
+`userId` integer(10) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`firstName` varchar(20),
+`lastName` varchar(20),
+`login` varchar(20),
+`password` integer(10),
+`roleId` integer(10) NOT NULL,
+FOREIGN KEY (`roleId`) REFERENCES `role` (`roleId`) ON DELETE CASCADE
 );
 
 #tiniint
 CREATE TABLE `statistic`(
-  `statisticId` integer(10) PRIMARY KEY  NOT NULL AUTO_INCREMENT,
-  `date` date,
-  `correct` boolean,
-  `questionId` integer(10),
-  `userId` integer(10),
-  FOREIGN KEY (`questionId`)  REFERENCES `question` (`questionId`) ON DELETE CASCADE,
-  FOREIGN KEY (`userId`)  REFERENCES `user` (`userId`) ON DELETE CASCADE
+`statisticId` integer(10) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`date` datetime,
+`correct` boolean,
+`questionId` integer(10),
+`userId` integer(10),
+FOREIGN KEY (`questionId`) REFERENCES `question` (`questionId`) ON DELETE CASCADE,
+FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE CASCADE
 );
 
 CREATE TABLE `literature`(
-  `literatureId` integer(10) PRIMARY KEY  NOT NULL AUTO_INCREMENT,
-  `description` varchar(100),
-  `questionId` integer(10) NOT NULL,
-   FOREIGN KEY (`questionId`) REFERENCES `question` (`questionId`) ON DELETE CASCADE
+`literatureId` integer(10) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`description` varchar(100),
+`questionId` integer(10) NOT NULL,
+FOREIGN KEY (`questionId`) REFERENCES `question` (`questionId`) ON DELETE CASCADE
 );
 
 CREATE TABLE `link`(
-  `linkId` integer(10) PRIMARY KEY  NOT NULL AUTO_INCREMENT,
-  `link` varchar(100),
-  `literatureId` integer(10) NOT NULL,
-   FOREIGN KEY (`literatureId`) REFERENCES `literature` (`literatureId`) ON DELETE CASCADE
+`linkId` integer(10) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`link` varchar(100),
+`literatureId` integer(10) NOT NULL,
+FOREIGN KEY (`literatureId`) REFERENCES `literature` (`literatureId`) ON DELETE CASCADE
 );
 
 LOCK TABLES `topic` WRITE;
@@ -83,7 +82,6 @@ INSERT INTO `topic` VALUES
 (1,'First topic','First topic'),
 (2,'Second topic','Second topic');
 UNLOCK TABLES;
-
 
 LOCK TABLES `test` WRITE;
 INSERT INTO `test` VALUES
@@ -147,10 +145,11 @@ INSERT INTO `statistic` VALUES
 (16, '2001-12-21', 1, 2, 3);
 UNLOCK TABLES;
 
-
 lock tables literature write;
 insert into literature values
-(1, "Literature 1", 1),
+(1,
+ 
+"Literature 1", 1),
 (2, "Literature 2", 2),
 (3, "Literature 3", 3),
 (4, "Literature 4", 4),
@@ -167,7 +166,6 @@ insert into literature values
 (15, "Literature 15", 15),
 (16, "Literature 16", 16);
 unlock tables;
-
 
 lock tables link write;
 insert into link values
@@ -188,7 +186,6 @@ insert into link values
 (15, "Link 15", 15),
 (16, "Link 16", 16);
 unlock tables;
-
 
 LOCK TABLES `answer` WRITE;
 INSERT INTO `answer` VALUES
@@ -273,6 +270,11 @@ INSERT INTO `answer` VALUES
 (64,'Answer 4 (false)','0','16');
 UNLOCK TABLES;
 
+create procedure personalUserTestStatistic(unreservedUserId int, unreserverStart datetime, unreservedEnd datetime)
+SELECT * FROM statistic where userId=unreservedUserId and date between unreserverStart and unreservedEnd;
+
+create procedure personalUserStatistic(unreservedId int)
+select count(questionId) as somecount, correct, questionId from statistic where userId=unreservedId group by questionId, correct;
 
 create view questionstatistic as
 select count(statistic.correct) as count, correct, statistic.questionId
@@ -294,7 +296,9 @@ CREATE FUNCTION testdifficulty(x1 int) RETURNS decimal(10, 2) DETERMINISTIC
 BEGIN
 DECLARE x2, x3 integer;
 declare x4 float;
-select sum(count) into x2 from teststatistic where testId = x1 and correct = 1 limit 1;
+select
+ 
+sum(count) into x2 from teststatistic where testId = x1 and correct = 1 limit 1;
 select sum(count) into x3 from teststatistic where testId = x1 limit 1;
 set x4 = x2 / x3;
 RETURN (x4);
@@ -318,4 +322,15 @@ END
 
 DELIMITER ;
 
-*/
+DELIMITER //
+
+CREATE FUNCTION rightRare(correct int, total int) RETURNS decimal(10, 2) DETERMINISTIC
+BEGIN
+DECLARE x2, x3 integer;
+declare x4 float;
+set x4 = correct / total;
+RETURN (x4);
+END
+//
+
+DELIMITER ;*/

@@ -1,17 +1,18 @@
 package incubator.dao;
 
+import incubator.model.Question;
 import incubator.model.Statistic;
 import incubator.service.AnswerService;
 import incubator.service.QuestionService;
+import incubator.service.QuestionStatModel;
 import incubator.service.UserService;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Date;
-import java.util.List;
 
 @Repository
 public class StatisticRepository implements DaoRepos<Statistic> {
@@ -55,27 +56,40 @@ public class StatisticRepository implements DaoRepos<Statistic> {
         return statisticList;
     }
 
-    public int[][] personalUserStatistic(int userId) {
-        int[][] arr = new int[userService.getUserByUserId(userId).getStatistics().size()][3];
-        int counter = 0;
+    public List<QuestionStatModel> personalUserStatistic(int userId) {
+        List<Statistic> statisticList = userService.getUserByUserId(userId).getStatistics();
+        Set<Question> questionSet = new HashSet<>();
+        List<QuestionStatModel> statList = new ArrayList<>();
 
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/managementsystem?verifyServerCertificate=false&useSSL=true", "root", "123qwe");
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("call personalUserStatistic(" + userId + ")");
-            while (rs.next()) {
-                arr[counter][0] = rs.getInt(1);
-                arr[counter][1] = rs.getInt(2);
-                arr[counter][2] = rs.getInt(3);
-                counter++;
-            }
-        } catch (ClassNotFoundException ex1) {
-            System.out.println("Class not found EX " + ex1.getMessage());
-        } catch (SQLException ex2) {
-            System.out.println("SQL EX " + ex2.getMessage());
+        for (Statistic statistic : userService.getUserByUserId(userId).getStatistics()
+        ) {
+            questionSet.add(statistic.getQuestion());
         }
-        return arr;
+
+        for (Question q : questionSet
+        ) {
+            int questionRate = 0;
+            int answerCount = 0;
+            double correctCOunt = 0;
+            String FIO = "";
+            String testName = "";
+            String questionDescription = "";
+            for (Statistic st : statisticList
+            ) {
+                if (q.getQuestionId() == st.getQuestion().getQuestionId()) {
+                    testName = st.getQuestion().getTest().getName();
+                    questionDescription = st.getQuestion().getDescription();
+                    FIO = st.getUser().getFIO(st.getUser());
+                    answerCount++;
+                    if (st.getCorrect() == 1) {
+                        correctCOunt++;
+                    }
+                }
+            }
+            questionRate = (int) ((correctCOunt / answerCount) * 100);
+            statList.add(new QuestionStatModel(answerCount, questionRate, FIO, testName, questionDescription));
+        }
+        return statList;
     }
 
 
