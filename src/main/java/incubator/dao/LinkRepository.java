@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 public class LinkRepository implements DaoRepos<Link> {
 
     @Autowired
-    SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
     @Override
     public SessionFactory getBeanToBeAutowired() {

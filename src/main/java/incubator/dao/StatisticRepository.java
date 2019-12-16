@@ -34,7 +34,7 @@ public class StatisticRepository implements DaoRepos<Statistic> {
         List<Statistic> statisticList = new ArrayList<>();
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/managementsystem", "root", "123qwe");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/managementsystem?verifyServerCertificate=false&useSSL=true", "root", "123qwe");
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("call personalUserTestStatistic(" + userId + ", '" + start + "', '" + end + "')");
             while (rs.next()) {
@@ -54,5 +54,29 @@ public class StatisticRepository implements DaoRepos<Statistic> {
         }
         return statisticList;
     }
+
+    public int[][] personalUserStatistic(int userId) {
+        int[][] arr = new int[userService.getUserByUserId(userId).getStatistics().size()][3];
+        int counter = 0;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/managementsystem?verifyServerCertificate=false&useSSL=true", "root", "123qwe");
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("call personalUserStatistic(" + userId + ")");
+            while (rs.next()) {
+                arr[counter][0] = rs.getInt(1);
+                arr[counter][1] = rs.getInt(2);
+                arr[counter][2] = rs.getInt(3);
+                counter++;
+            }
+        } catch (ClassNotFoundException ex1) {
+            System.out.println("Class not found EX " + ex1.getMessage());
+        } catch (SQLException ex2) {
+            System.out.println("SQL EX " + ex2.getMessage());
+        }
+        return arr;
+    }
+
 
 }

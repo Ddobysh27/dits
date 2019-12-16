@@ -47,6 +47,12 @@ public class StatisticServiceTest extends AbstractTestNGSpringContextTests {
         }
     }
 
+    @Test
+    public void fastTest() {
+        System.out.println(getClass().getResourceAsStream("db.prorperties"));
+    }
+
+
 
     @Test
     public void save() {
@@ -64,6 +70,16 @@ public class StatisticServiceTest extends AbstractTestNGSpringContextTests {
         for (Statistic st : statisticRepository.personalUserTestStatistic("1", "2019-12-14 11:44:00", "2019-12-14 11:44:08")
         ) {
             System.out.println(st);
+        }
+    }
+
+    @Test
+    public void userStatisticTest() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.print(statisticRepository.personalUserStatistic(1)[i][j]);
+            }
+            System.out.println(" ");
         }
     }
 
