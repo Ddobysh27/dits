@@ -1,5 +1,5 @@
 *.idea
 target
-*db.properties
+*/db.properties
 src/main/resources
 .gitignore

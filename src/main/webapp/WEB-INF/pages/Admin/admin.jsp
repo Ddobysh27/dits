@@ -15,7 +15,8 @@
 <a href="<c:url value="/createTest" />">Создать тест</a> <br>
 <a href="<c:url value="/createUser" />">Создать пользователя</a> <br>
 <a href="<c:url value="/adminStatistic" />">Статистика</a> <br>
-
+<p>
+<a href="<c:url value="/logout" />">Выйти</a>
 
 </body>
 </html>

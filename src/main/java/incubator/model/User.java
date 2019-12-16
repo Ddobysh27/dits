@@ -52,7 +52,7 @@ public class User {
     public User() {
     }
 
-    public String getNormanRole() {
+    public String getStringNameRole() {
         if (role.getAdmin() == 1) {
             return "ADMIN";
         } else if (role.getUser() == 1) {

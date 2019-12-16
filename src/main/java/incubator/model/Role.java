@@ -26,12 +26,13 @@ public class Role {
 
     @Override
     public String toString() {
-        return "Role{" +
-                "roleId=" + roleId +
-                ", user=" + user +
-                ", tutor=" + tutor +
-                ", admin=" + admin +
-                '}';
+        if ((this.admin == 1)) {
+            return "admin";
+        } else if (this.user == 1) {
+            return "user";
+        } else {
+            return "tutor";
+        }
     }
 
     public Role(int user, int tutor, int admin) {
@@ -51,7 +52,6 @@ public class Role {
         this.users = users;
     }
 
-
     public int getRoleId() {
         return roleId;
     }
@@ -60,27 +60,34 @@ public class Role {
         this.roleId = roleId;
     }
 
+    //id=1
     public int getUser() {
         return user;
     }
 
+    //id=1
     public void setUser(int user) {
         this.user = user;
     }
 
+    //id=2
     public int getTutor() {
         return tutor;
     }
 
+    //id=2
     public void setTutor(int tutor) {
         this.tutor = tutor;
     }
 
+    //id=3
     public int getAdmin() {
         return admin;
     }
 
+    //id=3
     public void setAdmin(int admin) {
         this.admin = admin;
     }
+
 }

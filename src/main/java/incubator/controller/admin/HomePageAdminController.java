@@ -1,18 +1,20 @@
 package incubator.controller.admin;
 
+import incubator.model.Role;
+import incubator.model.User;
+import incubator.service.CreateUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class HomePageAdminController {
+
     @GetMapping(value = "/createTest")
     public String createTest() {
         return "Admin/createTest";
-    }
-
-    @GetMapping(value = "/createUser")
-    public String createUser() {
-        return "Admin/createUser";
     }
 
     @GetMapping(value = "/adminStatistic")
@@ -26,9 +28,3 @@ public class HomePageAdminController {
     }
 
 }
-
-//    @GetMapping(value = "/admin")
-//    public String adminPage(ModelMap model) {
-//        model.addAttribute("user", getPrincipal());
-//        return "Admin/admin";
-//    }

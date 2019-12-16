@@ -102,7 +102,8 @@ insert into user values
 (2, "Peter", "Gregory", "PeetGreg", 102, 3),
 (3, "Richard", "Hendrics", "RichHen", 103, 2),
 (4, "Gilfoy", "Canadian", "Canadaonelove", 104, 1),
-(5, "Denesh", "Pakistan", "Pakistani", 105, 3);
+(5, "Denesh", "Pakistan", "Pakistani", 105, 3),
+(6, "Dmitry", "Dobysh", "admin", 123, 3);
 unlock tables;
 
 LOCK TABLES `question` WRITE;
