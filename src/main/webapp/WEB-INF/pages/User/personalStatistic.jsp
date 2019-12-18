@@ -15,11 +15,11 @@
     </tr>
     <c:forEach items="${statistic}" var="item">
         <tr>
-            <td> ${item.user.getFIO(item.user)} </td>
-            <td> ${item.question.test.name} </td>
-            <td> ${item.question.description} </td>
-            <td> Пройдено всего? </td>
-            <td> Процент правильно пройденных вопросов? </td>
+            <td> ${item.FIO} </td>
+            <td> ${item.testName} </td>
+            <td> ${item.questionDescription} </td>
+            <td> ${item.countAnswers} </td>
+            <td> ${item.questionRate} </td>
         </tr>
     </c:forEach>
 </table>

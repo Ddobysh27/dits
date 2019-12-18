@@ -35,13 +35,13 @@ public class QuestionService {
         return str;
     }
 
-    public Question getQuestionByDescription(String description) {
+    public Question getQuestionById(int id) {
         Question question = new Question();
         List<Question> questions = questionRepository.findAll(Question.class, questionRepository.getBeanToBeAutowired());
-        if (questions.toString().contains(description)) {
+        if (id >= 0 && id <= questions.size()) {
             for (Question quest : questions
             ) {
-                if (quest.getDescription().equals(description)) {
+                if (quest.getQuestionId() == id) {
                     question = quest;
                 }
             }

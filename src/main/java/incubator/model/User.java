@@ -72,7 +72,6 @@ public class User {
         }
     }
 
-
     public String getFIO(User user) {
         String str = "";
         str += user.getFirstName() + "\n";
@@ -104,7 +103,6 @@ public class User {
     public void setStatistics(List<Statistic> statistics) {
         this.statistics = statistics;
     }
-
 
     public int getUserId() {
         return userId;
