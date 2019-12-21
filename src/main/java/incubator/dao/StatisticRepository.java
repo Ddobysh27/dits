@@ -2,10 +2,7 @@ package incubator.dao;
 
 import incubator.model.Question;
 import incubator.model.Statistic;
-import incubator.service.AnswerService;
-import incubator.service.QuestionService;
-import incubator.service.QuestionStatModel;
-import incubator.service.UserService;
+import incubator.service.*;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -93,4 +90,7 @@ public class StatisticRepository implements DaoRepos<Statistic> {
     }
 
 
-}
+
+
+
+    }

@@ -26,13 +26,28 @@ public class AdminCreateTestController {
     @Autowired
     RoleService roleService;
 
-    @GetMapping("/createTest")
-    public String createTest(Model model){
-        model.addAttribute("topics", topicService.getNamesTopics());
-        model.addAttribute("tests", testService.getNamesTests() );
-        model.addAttribute("questions", questionService.getNamesQuestions());
-        return "Admin/createTest";
-    }
+
+        @PostMapping("/createTest")
+        public String addTest(Model model){
+            List <String> nameTopics = topicService.getNamesTopics();
+            List <String> nameTests = testService.getNamesTests();
+            List <String> nameQuestions = questionService.getNamesQuestions();
+
+
+
+            model.addAttribute("topics", nameTopics);
+            model.addAttribute("tests", nameTests );
+            model.addAttribute("questions", nameQuestions);
+            return "Admin/createTest";
+        }
+
+        @GetMapping("/createTest")
+        public String createTest(Model model){
+            model.addAttribute("topics", topicService.getNamesTopics());
+            model.addAttribute("tests", testService.getNamesTests() );
+            model.addAttribute("questions", questionService.getNamesQuestions());
+            return "Admin/createTest";
+        }
 
 
 

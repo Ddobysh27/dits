@@ -82,6 +82,13 @@ public class Statistic {
         this.question = question;
     }
 
+    public boolean isCorrect(int correct){
+        if (correct == 1 ){
+            return true;
+        }else  return false;
+    }
+
+
 
     public static class Builder {
         private Statistic statistic;
@@ -118,6 +125,5 @@ public class Statistic {
         public Statistic create() {
             return statistic;
         }
-
     }
 }

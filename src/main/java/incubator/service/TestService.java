@@ -61,4 +61,8 @@ public class TestService {
     }
 
 
+    public List<Test> getAllTests() {
+        return testRepository.findAll(Test.class, testRepository.getBeanToBeAutowired());
+    }
+
 }

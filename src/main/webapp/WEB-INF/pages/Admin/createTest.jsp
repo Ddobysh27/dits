@@ -24,42 +24,44 @@
 <%--    <p>${topic}</p>--%>
 
 <%--</c:forEach>--%>
-<p>
-    <input list="topics">
-    <datalist id="topics">
-        <c:forEach items="${topics}" var="topic">
+<form>
+    <p>
+        <input list="topics">
+        <datalist id="topics">
+            <c:forEach items="${topics}" var="topic">
 
-        <option value="${topic}">
+            <option value="${topic}">
 
-            </c:forEach>
-    </datalist>
-</p>
+                </c:forEach>
+        </datalist>
+    </p>
 
-<p>
-    <input list="tests">
-    <datalist id="tests">
-        <c:forEach items="${tests}" var="test">
+    <p>
+        <input list="tests">
+        <datalist id="tests">
+            <c:forEach items="${tests}" var="test">
 
-        <option value="${test}">
+            <option value="${test}">
 
-            </c:forEach>
-    </datalist>
-</p>
+                </c:forEach>
+        </datalist>
+    </p>
 
-<p>
-    <input list="questions">
-    <datalist id="questions">
-        <c:forEach items="${questions}" var="question">
+    <p>
+        <input list="questions">
+        <datalist id="questions">
+            <c:forEach items="${questions}" var="question">
 
-        <option value="${question}">
+            <option value="${question}">
 
-            </c:forEach>
-    </datalist>
-</p>
+                </c:forEach>
+        </datalist>
+    </p>
 
-<input type="submit" value="Отправить"></p>
+    <input type="submit" value="Отправить"></p>
 
 </form>
+
 
 
 <form action="/goHomeAdmin">

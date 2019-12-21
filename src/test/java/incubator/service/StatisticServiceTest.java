@@ -17,6 +17,7 @@ import org.testng.annotations.Test;
 
 import javax.persistence.Query;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -82,4 +83,12 @@ public class StatisticServiceTest extends AbstractTestNGSpringContextTests {
         }
     }
 
+    @Test
+    public void getAllStatisticByQuestionId(){
+        List<Statistic> statistics = new ArrayList<>(statisticService.getAllStatisticByQuestionId(1));
+        for (Statistic statistic: statistics
+             ) {
+            System.out.println(statistic);
+        }
+    }
 }

@@ -57,6 +57,21 @@ public class StatisticService {
         return statisticRepository.personalUserTestStatistic(userId, start, end);
     }
 
+    public List<Statistic> getAllStatisticByQuestionId(int questionId){
+
+        List<Statistic> statistics = new ArrayList<>(findAll());
+        statistics.removeIf(q -> questionId != q.getQuestion().getQuestionId());
+        return statistics;
+    }
+
+    public List<Statistic> getAllStatisticByTestId(int testId){
+
+        List<Statistic> statistics = new ArrayList<>(findAll());
+        statistics.removeIf(t -> testId != t.getQuestion().getTest().getTestId());
+        return statistics;
+    }
+
+
 }
 
 
