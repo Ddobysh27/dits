@@ -65,18 +65,17 @@ public class StatisticRepository implements DaoRepos<Statistic> {
 
         for (Question q : questionSet
         ) {
+            QuestionStatModel questionStatModel = new QuestionStatModel();
             int questionRate = 0;
             int answerCount = 0;
             double correctCOunt = 0;
-            String FIO = "";
-            String testName = "";
-            String questionDescription = "";
             for (Statistic st : statisticList
             ) {
                 if (q.getQuestionId() == st.getQuestion().getQuestionId()) {
-                    testName = st.getQuestion().getTest().getName();
-                    questionDescription = st.getQuestion().getDescription();
-                    FIO = st.getUser().getFIO(st.getUser());
+                    questionStatModel.setQuestionId(st.getQuestion().getQuestionId());
+                    questionStatModel.setTestName(st.getQuestion().getTest().getName());
+                    questionStatModel.setQuestionDescription(st.getQuestion().getDescription());
+                    questionStatModel.setFIO(st.getUser().getFIO(st.getUser()));
                     answerCount++;
                     if (st.getCorrect() == 1) {
                         correctCOunt++;
@@ -84,7 +83,9 @@ public class StatisticRepository implements DaoRepos<Statistic> {
                 }
             }
             questionRate = (int) ((correctCOunt / answerCount) * 100);
-            statList.add(new QuestionStatModel(answerCount, questionRate, FIO, testName, questionDescription));
+            questionStatModel.setCountAnswers(answerCount);
+            questionStatModel.setQuestionRate(questionRate);
+            statList.add(questionStatModel);
         }
         return statList;
     }

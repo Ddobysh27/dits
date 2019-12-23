@@ -2,11 +2,12 @@ package incubator.service;
 
 public class QuestionStatModel {
     int questionId;
-    int countAnswers;
-    double questionRate;
     String FIO;
     String testName;
     String questionDescription;
+    int countAnswers;
+    double questionRate;
+
 
     public QuestionStatModel(int countAnswers, double questionRate, String FIO, String testName, String questionDescription) {
         this.countAnswers = countAnswers;
@@ -14,6 +15,10 @@ public class QuestionStatModel {
         this.FIO = FIO;
         this.testName = testName;
         this.questionDescription = questionDescription;
+    }
+
+    public QuestionStatModel() {
+
     }
 
     public String getFIO() {

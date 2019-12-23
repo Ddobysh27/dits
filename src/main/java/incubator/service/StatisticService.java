@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class StatisticService {
@@ -17,6 +15,7 @@ public class StatisticService {
     @Autowired
     private StatisticRepository statisticRepository;
 
+    public Map<String, Statistic> statList;
 
     public List<Statistic> findAll() {
         return statisticRepository.findAll(Statistic.class, statisticRepository.getBeanToBeAutowired());
@@ -43,6 +42,15 @@ public class StatisticService {
         System.out.println("Рейтинг пользователя " + list.get(var).getUser().getFirstName() + " - " + userRate + "%");
     }
 
+    @Transactional
+    public void saveMapOfStat(Map<String, Statistic> map, String endTest) {
+        for (Statistic st : map.values()
+        ) {
+            st.setDate(endTest);
+            testingCreateMethod(st);
+        }
+    }
+
 
     public List<QuestionStatModel> getStatList(int userId) {
         return statisticRepository.personalUserStatistic(userId);
@@ -57,6 +65,7 @@ public class StatisticService {
         return statisticRepository.personalUserTestStatistic(userId, start, end);
     }
 
+
     public List<Statistic> getAllStatisticByQuestionId(int questionId){
 
         List<Statistic> statistics = new ArrayList<>(findAll());
@@ -70,6 +79,17 @@ public class StatisticService {
         statistics.removeIf(t -> testId != t.getQuestion().getTest().getTestId());
         return statistics;
     }
+
+
+
+    public Map<String, Statistic> getStatList() {
+        return statList;
+    }
+
+    public void setStatList(Map<String, Statistic> statList) {
+        this.statList = statList;
+    }
+
 
 
 }
