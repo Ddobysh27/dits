@@ -1,8 +1,6 @@
 package incubator.controller.user;
 
 
-import incubator.model.Statistic;
-import incubator.model.User;
 import incubator.service.QuestionStatModel;
 import incubator.service.SortByQuestionId;
 import incubator.service.StatisticService;
@@ -27,14 +25,15 @@ public class StatisticPageController {
     StatisticService statisticService;
 
     @GetMapping(value = "/goUserHome")
-    public String goHome() {
+    public String goHome(ModelMap modelMap) {
+        modelMap.addAttribute("user", getPrincipal());
         return "User/user";
     }
 
     @GetMapping(value = "/personalStatistic")
     public String resultPageFill(ModelMap modelMap) {
         List<QuestionStatModel> varList = statisticService.getStatList(userService.getUserByUsername(getPrincipal()).getUserId());
-        Collections.sort(varList, new SortByQuestionId());
+        varList.sort(new SortByQuestionId());
         modelMap.addAttribute("statistic", varList);
         return "User/personalStatistic";
     }

@@ -10,16 +10,15 @@
 
 <form action="/goTest">
 
-    <select id="themes" name="themes">
+    <select id="themes" name="themes" onload="onload(this)">
         <c:forEach items="${topic}" var="topic">
-            <option> ${topic.name} </option>
+            <option selected="selected"> ${topic.name} </option>
         </c:forEach>
     </select>
 
     <br>
         <select id="tests" name="testName">
             <option>Выберите тест</option>
-            <option></option>
         </select>
     </div>
     <br>
@@ -27,6 +26,27 @@
     <input type="submit" value="Пройти тестирование">
 
 </form>
+
+
+
+<script type="text/javascript">
+    function onload(element) {
+        $.ajax({
+            url: "/UserChoose",
+            type: "GET",
+            dataType: "json",
+            data: {topic: $(element).val()},
+        })
+            .done(function (data) {
+                alert("done")
+                setTests(data)
+            })
+            .fail(function (xhr, status, error) {
+                alert("fail")
+                alert(xhr.responseText + '|\n' + status + '|\n' +error);
+            });
+    }
+</script>
 
 <script>
     $().ready(function () {
@@ -43,7 +63,6 @@
                 .fail(function (xhr, status, error) {
                 alert(xhr.responseText + '|\n' + status + '|\n' +error);
             });
-
         });
     });
 

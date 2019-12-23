@@ -17,6 +17,17 @@ public class StatisticService {
 
     public Map<String, Statistic> statList;
 
+
+    @Transactional
+    public void saveMapOfStat(Map<String, Statistic> map, String endTest) {
+        for (Statistic st : map.values()
+        ) {
+            st.setDate(endTest);
+            testingCreateMethod(st);
+        }
+    }
+
+
     public List<Statistic> findAll() {
         return statisticRepository.findAll(Statistic.class, statisticRepository.getBeanToBeAutowired());
     }
@@ -41,16 +52,6 @@ public class StatisticService {
         userRate = ((double) correctUserList.size() / allUserList.size()) * 100;
         System.out.println("Рейтинг пользователя " + list.get(var).getUser().getFirstName() + " - " + userRate + "%");
     }
-
-    @Transactional
-    public void saveMapOfStat(Map<String, Statistic> map, String endTest) {
-        for (Statistic st : map.values()
-        ) {
-            st.setDate(endTest);
-            testingCreateMethod(st);
-        }
-    }
-
 
     public List<QuestionStatModel> getStatList(int userId) {
         return statisticRepository.personalUserStatistic(userId);
