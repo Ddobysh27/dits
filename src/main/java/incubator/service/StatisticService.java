@@ -66,20 +66,34 @@ public class StatisticService {
     }
 
 
-    public List<Statistic> getAllStatisticByQuestionId(int questionId){
+    public List<Statistic> getFilteredStatisticByQuestionId(int questionId){
 
         List<Statistic> statistics = new ArrayList<>(findAll());
         statistics.removeIf(q -> questionId != q.getQuestion().getQuestionId());
         return statistics;
     }
 
-    public List<Statistic> getAllStatisticByTestId(int testId){
+    public List<Statistic> getFilteredStatisticByTestId(int testId){
 
         List<Statistic> statistics = new ArrayList<>(findAll());
         statistics.removeIf(t -> testId != t.getQuestion().getTest().getTestId());
         return statistics;
     }
 
+    public List<Statistic> getFilteredStatisticByUserId(int userId, List<Statistic> statistics){
+
+        //List<Statistic> statistics = new ArrayList<>(findAll());
+        statistics.removeIf(u -> userId != u.getUser().getUserId());//t.getQuestion().getTest().getTestId());
+        return statistics;
+    }
+
+    public List<Statistic> getFilteredStatisticByTestUser(Statistic statistic){
+
+        List<Statistic> statistics = new ArrayList<>(findAll());
+        statistics.removeIf(u -> statistic.getUser().getUserId() != u.getUser().getUserId());//t.getQuestion().getTest().getTestId());
+        statistics.removeIf(t -> statistic.getQuestion().getTest().getTestId() != t.getQuestion().getTest().getTestId());
+        return statistics;
+    }
 
 
     public Map<String, Statistic> getStatList() {

@@ -79,6 +79,13 @@ public class User {
         return str;
     }
 
+    public String getFIO() {
+        String str = "";
+        str += this.getFirstName() + "\n";
+        str += this.getLastName() + "\n";
+        return str;
+    }
+
     public List<Statistic> getStatistics() {
         return statistics;
     }

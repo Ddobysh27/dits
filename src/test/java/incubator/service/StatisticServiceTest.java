@@ -2,11 +2,8 @@ package incubator.service;
 
 import incubator.config.HibernateConfig;
 import incubator.config.WebConfig;
-import incubator.dao.AnswerRepository;
 import incubator.dao.StatisticRepository;
-import incubator.model.Answer;
 import incubator.model.Statistic;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
@@ -15,13 +12,10 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.testng.annotations.Test;
 
-import javax.persistence.Query;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import static org.testng.Assert.*;
 
 @ComponentScan(basePackages = "incubator")
 @ContextConfiguration(classes = {WebConfig.class, HibernateConfig.class})
@@ -83,12 +77,20 @@ public class StatisticServiceTest extends AbstractTestNGSpringContextTests {
         }
     }
 
-    @Test
+
     public void getAllStatisticByQuestionId(){
-        List<Statistic> statistics = new ArrayList<>(statisticService.getAllStatisticByQuestionId(1));
+        List<Statistic> statistics = new ArrayList<>(statisticService.getFilteredStatisticByQuestionId(1));
         for (Statistic statistic: statistics
              ) {
             System.out.println(statistic);
+        }
+    }
+
+    @Test
+    public void testFindAll(){
+        for (Statistic s: statisticService.findAll()
+             ) {
+            System.out.println(s);
         }
     }
 }

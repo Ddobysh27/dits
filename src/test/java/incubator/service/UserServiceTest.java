@@ -4,6 +4,7 @@ import incubator.config.HibernateConfig;
 import incubator.config.WebConfig;
 import incubator.model.Question;
 import incubator.model.Statistic;
+import incubator.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
@@ -48,4 +49,14 @@ public class UserServiceTest extends AbstractTestNGSpringContextTests {
             System.out.println(q);
         }
     }
+
+    @Test
+    public void testGetAllUsers() {
+        for (User u: userService.getAllUsers()
+             ) {
+            System.out.println(u);
+        }
+
+    }
+
 }

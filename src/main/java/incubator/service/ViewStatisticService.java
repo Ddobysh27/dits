@@ -1,17 +1,13 @@
 package incubator.service;
 
 import incubator.dao.QuestionRepository;
-import incubator.dao.StatisticRepository;
-import incubator.dao.TestRepository;
 import incubator.model.Question;
 import incubator.model.Statistic;
 import incubator.model.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ViewStatisticService {
@@ -21,26 +17,23 @@ public class ViewStatisticService {
     QuestionRepository questionRepository;
 
     @Autowired
-    TestRepository testRepository;
-
-    @Autowired
     TestService testService;
 
     @Autowired
     StatisticService statisticService;
 
     @Autowired
-    StatisticRepository statisticRepository;
+    QuestionService questionService;
 
     @Autowired
-    QuestionService questionService;
+    UserService userService;
 
 
     private ViewStatistic getQuestionInfo(Question question) {
         ViewStatistic viewStatistic;
 
         //вынестив в отдельный метод
-        List<Statistic> statisticList = statisticService.getAllStatisticByQuestionId(question.getQuestionId());// statisticRepository.findAll(Statistic.class, statisticRepository.getBeanToBeAutowired()) ;
+        List<Statistic> statisticList = statisticService.getFilteredStatisticByQuestionId(question.getQuestionId());// statisticRepository.findAll(Statistic.class, statisticRepository.getBeanToBeAutowired()) ;
         //get list by currently question
         if (!statisticList.isEmpty()) {
             int numberOfTimes = statisticList.size();
@@ -63,7 +56,6 @@ public class ViewStatisticService {
         return viewStatistic;
     }
 
-
     public List<ViewStatistic> getQuestionStatisticList() {
         List<ViewStatistic> questionInfoList = new ArrayList<>();
         ViewStatistic viewStatistic;
@@ -83,7 +75,7 @@ public class ViewStatisticService {
         ViewStatistic viewStatistic;
         //вынестив в отдельный метод
         //List<Statistic> statisticList = statisticService.getAllStatisticByQuestionId(question.getQuestionId());// statisticRepository.findAll(Statistic.class, statisticRepository.getBeanToBeAutowired()) ;
-        List<Statistic> statisticList = statisticService.getAllStatisticByTestId(test.getTestId());// statisticRepository.findAll(Statistic.class, statisticRepository.getBeanToBeAutowired()) ;
+        List<Statistic> statisticList = statisticService.getFilteredStatisticByTestId(test.getTestId());// statisticRepository.findAll(Statistic.class, statisticRepository.getBeanToBeAutowired()) ;
         //get list by currently question
         // questionService.getAllQuestions().removeIf(t -> test.getTestId() != t.getTest().getTestId())
 
@@ -101,13 +93,12 @@ public class ViewStatisticService {
                     test.getName(),
                     numberOfTimes,
                     //вынести в отдельный метод процент правильных ответов
-                    (int) Math.round(((double) countOfCorrectAnswers / numberOfQuestionInTest) / numberOfTimes * 100));
+                    (int) Math.round(((double) (countOfCorrectAnswers / numberOfQuestionInTest)) / numberOfTimes * 100));
         } else {
             viewStatistic = null;
         }
         return viewStatistic;
     }
-
 
     public List<ViewStatistic> getTestStatisticList() {
         List<ViewStatistic> testInfoList = new ArrayList<>();
@@ -122,6 +113,110 @@ public class ViewStatisticService {
         // сортировка списка по названию теста
         testInfoList.sort(Comparator.comparing(ViewStatistic::getName));
         return testInfoList;
+    }
+
+    private ViewStatistic getUserTestInfo(Statistic statistic) {
+
+        ViewStatistic viewStatistic;
+
+        List<Statistic> statisticList = statisticService.getFilteredStatisticByTestUser(statistic);
+
+        if (!statisticList.isEmpty()) {
+            //int countQuestionInTest = statistic.getQuestion().getTest().getQuestions().size();
+            //int numberOfTimes = Math.round(statisticList.size() / numberOfQuestionInTest);
+            int countAllAnswers = statisticList.size(); //countAllAnswer(statistic);
+            int countOfCorrectAnswers = countCorrectAnswer(statistic);
+
+            //посчитать сколько раз проходил данный тест данный пользователь
+            int countTimesCompletedTest = countUserCompletedTest(statistic);
+
+
+            viewStatistic = new ViewStatistic(
+                    statistic.getUser().getFIO(),
+                    statistic.getQuestion().getTest().getName(),
+                    countTimesCompletedTest,
+                    //вынести в отдельный метод процент правильных ответов
+                    calculatePercentage(statisticList)
+                    //(int) Math.round(((double) (countOfCorrectAnswers / countAllAnswers)) * 100)
+            );
+
+        } else {
+            viewStatistic = null;
+        }
+        return viewStatistic;
+
+
+    }
+
+    //  private int countUserCompletedTest(int userId, int testId){
+    private int countUserCompletedTest(Statistic statistic) {
+
+        int count = 0;
+        List<Statistic> statisticList = statisticService.getFilteredStatisticByTestId(statistic.getQuestion().getTest().getTestId());
+        for (Statistic s : statisticList) {
+            if (statistic.getUser().getUserId() == s.getUser().getUserId()) {
+                count++;
+            }
+        }
+//        List<Statistic> statisticList = statisticService.getFilteredStatisticByTestUser(statistic);
+//        statisticList.removeIf( s -> s.getQuestion().getTest().getName() != statistic.getQuestion().getTest().getName()  );;
+//        count = statisticList.size();
+        return count;
+    }
+
+
+    private int countCorrectAnswer(Statistic statistic) {
+        int count = 0;
+        List<Statistic> statisticList = statisticService.getFilteredStatisticByTestUser(statistic);
+
+        for (Statistic s : statisticList) {
+            if (s.getCorrect() == 1) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    public int calculatePercentage(List<Statistic> statisticList){
+
+        int countOfTrueAnswers = 0;
+        double countQuestions = statisticList.size();
+
+        for (Statistic statistic : statisticList){
+            if (statistic.getCorrect() == 1) countOfTrueAnswers++;
+        }
+        return  (int) Math.round(countOfTrueAnswers / countQuestions * 100);
+    }
+
+
+    private int countAllAnswer(Statistic statistic) {
+
+        List<Statistic> statisticListTestId = statisticService.getFilteredStatisticByTestId(statistic.getQuestion().getTest().getTestId());
+        List<Statistic> statisticListUserId = statisticService.getFilteredStatisticByUserId(statistic.getUser().getUserId(), statisticListTestId);
+        //statisticService.getAllStatisticByTestId(statistic.getQuestion().getTest().getTestId());
+
+        return statisticListUserId.size();
+    }
+
+    public List<ViewStatistic> getUserTestStatisticList() {
+
+        List<ViewStatistic> userTestInfoList = new ArrayList<>();
+        ViewStatistic viewStatistic;
+        List<Statistic> statisticList = statisticService.findAll();
+        for (Statistic statistic : statisticList) {
+            viewStatistic = getUserTestInfo(statistic);
+            if (viewStatistic != null) {
+                userTestInfoList.add(viewStatistic);
+            }
+        }
+        // сортировка списка по названию FIO
+        Set<ViewStatistic> set = new HashSet<>(userTestInfoList);
+        userTestInfoList.clear();
+        userTestInfoList.addAll(set);
+        userTestInfoList.sort(Comparator.comparing(ViewStatistic::getFIO));
+
+        return userTestInfoList;
     }
 
 

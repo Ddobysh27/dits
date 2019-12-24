@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -14,6 +15,9 @@ public class AdminStatisticPageController {
 
     @Autowired
     ViewStatisticService viewStatisticService;
+
+    @Autowired
+    StatisticService statisticService;
 
 
     @GetMapping("/statisticByQuestion")
@@ -30,6 +34,18 @@ public class AdminStatisticPageController {
 //            Collections.sort(varList, new SortByQuestionId());
         modelMap.addAttribute("statisticList", statisticByTestList);
         return "Admin/statisticByTest";
+    }
+
+
+    @GetMapping(value = "/statisticEveryUser")
+    public String resultPageFill(ModelMap modelMap) {
+
+        List<ViewStatistic> varList = viewStatisticService.getUserTestStatisticList();
+
+        //List<QuestionStatModel> varList = statisticService.getStatList(userService.getUserByUsername(getPrincipal()).getUserId());
+        //varList.sort(Comparator.comparing(QuestionStatModel::getFIO));
+        modelMap.addAttribute("statistic", varList);
+        return "Admin/statisticEveryUser";
     }
 
 

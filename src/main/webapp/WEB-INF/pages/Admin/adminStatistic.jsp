@@ -16,7 +16,7 @@
 
 <a href="<c:url value="/statisticByTest" />">Статистика по тесту </a> <br>
 <a href="<c:url value="/statisticByQuestion" />">Статистика по вопросам </a> <br>
-<a href="<c:url value="/goHomeAdmin" />">Статистика пользователей </a> <br>
+<a href="<c:url value="/statisticEveryUser" />">Статистика пользователей </a> <br>
 
 <form action="/goHomeAdmin">
     <input type="submit" value="Назад">

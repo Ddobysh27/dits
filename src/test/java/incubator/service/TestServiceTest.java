@@ -38,5 +38,13 @@ public class TestServiceTest extends AbstractTestNGSpringContextTests {
         System.out.println(testService.getTestByName("First test"));
     }
 
+    @Test
+    public void getAllTests(){
+        for (incubator.model.Test t: testService.getAllTests()
+             ) {
+            System.out.println(t);
+        }
+    }
+
 
 }
