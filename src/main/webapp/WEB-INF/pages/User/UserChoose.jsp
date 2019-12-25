@@ -5,28 +5,60 @@
 <html>
 <head>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="/res/mycont.css" rel="stylesheet" type="text/css">
+    <link href="/res/input.css" rel="stylesheet" type="text/css">
+    <link href="/res/button.css" rel="stylesheet" type="text/css">
+    <link href="/res/link.css" rel="stylesheet" type="text/css">
+    <title>
+        Select
+    </title>
 </head>
 <body>
 
-<form action="/goTest">
+<div class="mycont">
+    <div class="margin-top8">
 
-    <select id="themes" name="themes" onload="onload(this)">
-        <c:forEach items="${topic}" var="topic">
-            <option selected="selected"> ${topic.name} </option>
-        </c:forEach>
-    </select>
+        <div class="row">
 
-    <br>
-        <select id="tests" name="testName">
-            <option>Выберите тест</option>
-        </select>
+            <div class="col">
+                <div class="mycont">
+                    <img src="/resources/images/human.png">
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="margin-top8">
+                    <div class="mycont somefont">
+
+                        <form action="/goTest">
+
+                            <select class="css-input" id="themes" name="themes" onload="onload(this)">
+                                <c:forEach items="${topic}" var="topic">
+                                    <option selected="selected"> ${topic.name} </option>
+                                </c:forEach>
+                            </select>
+
+                            <br>
+                            <select class="css-input" id="tests" name="testName">
+                                <option>Выберите тест</option>
+                            </select>
+                    </div>
+                    <br>
+
+                    <input class="myButton" type="submit" value="Пройти тестирование">
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
     </div>
-    <br>
 
-    <input type="submit" value="Пройти тестирование">
-
-</form>
-
+</div>
+</div>
 
 
 <script type="text/javascript">
@@ -43,7 +75,7 @@
             })
             .fail(function (xhr, status, error) {
                 alert("fail")
-                alert(xhr.responseText + '|\n' + status + '|\n' +error);
+                alert(xhr.responseText + '|\n' + status + '|\n' + error);
             });
     }
 </script>
@@ -61,8 +93,8 @@
                     setTests(data)
                 })
                 .fail(function (xhr, status, error) {
-                alert(xhr.responseText + '|\n' + status + '|\n' +error);
-            });
+                    alert(xhr.responseText + '|\n' + status + '|\n' + error);
+                });
         });
     });
 

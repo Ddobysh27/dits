@@ -1,8 +1,30 @@
-.mycont{
+.mycont {
     position: relative;
-    top: 15%;
     align-content: center;
     align-items: center;
     align-self: center;
     text-align: center;
+    vertical-align: middle;
+    display: block;
+}
+
+.margin-top15 {
+    margin-top: 15%;
+}
+
+.myouter {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.myinner {
+    display: inline-block;
+}
+
+.myouter-wrapper {
+    display: table;
+}
+
+.margin-top8 {
+    margin-top: 8%;
 }

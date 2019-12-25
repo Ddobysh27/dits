@@ -4,36 +4,65 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="/res/mycont.css" rel="stylesheet" type="text/css">
+    <link href="/res/link.css" rel="stylesheet" type="text/css">
+    <link href="/res/table.css" rel="stylesheet" type="text/css">
+    <link href="/res/button.css" rel="stylesheet" type="text/css">
+    <title>
+        Statistic
+    </title>
 </head>
 <body>
 
 <div class="mycont">
+    <div class="margin-top8">
 
-    <table border="2" align="center" width="300px">
-        <tr>
-            <th>Ф.И.О.</th>
-            <th>Название теста</th>
-            <th>Формулировка вопроса</th>
-            <th>Пройдено всего</th>
-            <th>Процент правильно пройденных вопросов</th>
-        </tr>
+        <div class="row">
+            <div class="col">
+                <div class="mycont">
 
-        <c:forEach items="${statistic}" var="item">
-            <tr>
-                <td> ${item.FIO} </td>
-                <td> ${item.testName} </td>
-                <td> ${item.questionDescription} </td>
-                <td> ${item.countAnswers} </td>
-                <td> ${item.questionRate} </td>
-            </tr>
-        </c:forEach>
-    </table>
+                    <table class="blueTable">
+                        <thead>
+                        <tr>
+                            <th>Ф.И.О.</th>
+                            <th>Название теста</th>
+                            <th>Формулировка вопроса</th>
+                            <th>Пройдено всего</th>
+                            <th>Процент правильно пройденных вопросов</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${statistic}" var="item">
+                                <tr>
+                                    <td> ${item.FIO} </td>
+                                    <td> ${item.testName} </td>
+                                    <td> ${item.questionDescription} </td>
+                                    <td> ${item.countAnswers} </td>
+                                    <td> ${item.questionRate} </td>
+                                </tr>
+                            </c:forEach>
+                        </div>
+                    </table>
 
-    <br>
-    <form action="/goUserHome">
-        <input type="submit" value="Home page">
-    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="mycont somefont">
+                    <form action="/goUserHome">
+                        <input class="myButton" type="submit" value="Home page">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 
 </div>
 </body>
