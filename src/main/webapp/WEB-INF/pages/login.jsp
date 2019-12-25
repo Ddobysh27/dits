@@ -4,40 +4,42 @@
 <head>
     <title>Login</title>
     <meta charset="utf-8">
+    <link href="/res/input.css" rel="stylesheet" type="text/css">
+    <link href="/res/button.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<div class="main">
-    <div>
-        <div>
-            <c:url var="loginUrl" value="/login"/>
-            <form action="${loginUrl}" method="post">
+<div class="mycont">
+    <c:url var="loginUrl" value="/login"/>
+    <form action="${loginUrl}" method="post">
+        <c:if test="${param.error != null}">
+            <div class="alert alert-danger">
+                <p>Invalid username and password.</p>
+            </div>
+        </c:if>
+        <c:if test="${param.logout != null}">
+            <div class="alert alert-success">
+                <p>You have been logged out successfully.</p>
+            </div>
+        </c:if>
+        <p>
+            <input type="text" class="login-field css-input" id="username" name="ssoId" placeholder="Логин" value=""
+                   required>
+        </p>
+        <p>
+            <input type="password" class="password-field css-input" id="password" name="password"
+                   placeholder="Пароль"
+                   value="" required>
+        </p>
+        <p>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </p>
+        <p>
+            <input type="submit" class="myButton" value="Войти">
+        </p>
 
-                <c:if test="${param.error != null}">
-                    <div class="alert alert-danger">
-                        <p>Invalid username and password.</p>
-                    </div>
-                </c:if>
-
-                <c:if test="${param.logout != null}">
-                    <div class="alert alert-success">
-                        <p>You have been logged out successfully.</p>
-                    </div>
-                </c:if>
-
-                <div>
-                    <input type="text" class="login-field" id="username" name="ssoId" placeholder="Логин"  value="" required>
-                </div>
-                <div>
-                    <input type="password" class="password-field" id="password" name="password" placeholder="Пароль"
-                           value=""    required>
-                </div>
-
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
-                <input type="submit" class="submit-button" value="Войти">
-            </form>
-        </div>
-    </div>
+    </form>
 </div>
 </body>
 </html>

@@ -1,0 +1,22 @@
+.css-input {
+    padding: 0px;
+    font-size: 50px;
+    border-width: 3px;
+    border-color: #4e82be;
+    text-align: center;
+    background-color: #ffffff;
+    color: #4e82be;
+    border-style: solid;
+    border-radius: 20px;
+    box-shadow: 0px 0px 0px rgba(66,66,66,.75);
+    text-shadow: 0px 0px 5px rgba(66,66,66,.75);
+}
+.css-input:focus {
+    outline:none;
+}
+.mycont{
+    margin-left: 35%;
+    margin-right: auto;
+    margin-top: 10%;
+    margin-bottom: auto;
+}

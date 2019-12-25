@@ -1,6 +1,5 @@
 package incubator.controller.user;
 
-
 import incubator.service.QuestionStatModel;
 import incubator.service.SortByQuestionId;
 import incubator.service.StatisticService;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -37,7 +35,6 @@ public class StatisticPageController {
         modelMap.addAttribute("statistic", varList);
         return "User/personalStatistic";
     }
-
 
     private static String getPrincipal() {
         String userName = "";
