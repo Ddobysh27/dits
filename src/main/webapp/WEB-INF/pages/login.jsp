@@ -5,12 +5,15 @@
     <title>Login</title>
     <meta charset="utf-8">
     <link href="/res/input.css" rel="stylesheet" type="text/css">
+    <link href="/res/mycont.css" rel="stylesheet" type="text/css">
     <link href="/res/button.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body>
+
 <div class="mycont">
+
+
     <c:url var="loginUrl" value="/login"/>
     <form action="${loginUrl}" method="post">
         <c:if test="${param.error != null}">
@@ -24,7 +27,9 @@
             </div>
         </c:if>
         <p>
-            <input type="text" class="login-field css-input" id="username" name="ssoId" placeholder="Логин" value=""
+            <input type="text" class="login-field css-input" id="username" name="ssoId"
+                   placeholder="Логин"
+                   value=""
                    required>
         </p>
         <p>
@@ -40,6 +45,9 @@
         </p>
 
     </form>
+
+
 </div>
+
 </body>
 </html>

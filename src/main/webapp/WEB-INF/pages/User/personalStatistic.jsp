@@ -4,15 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="/res/mycont.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
-<div class="container">
+<div class="mycont">
 
-
-    <table border="2">
+    <table border="2" align="center" width="300px">
         <tr>
             <th>Ф.И.О.</th>
             <th>Название теста</th>
