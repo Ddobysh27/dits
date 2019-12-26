@@ -36,7 +36,7 @@
 
             <div class="col">
 
-                <div class="margin-top8">
+                <div class="margin-top20">
                     <div class="mycont somefont">
                         <a href="<c:url value="/chooseTest" />">Выбор темы и теста</a> <br>
                         <a href="<c:url value="/personalStatistic" />">Личная статистика</a> <br>

@@ -34,7 +34,7 @@
 
                         <form action="/goTest">
 
-                            <select class="css-input" id="themes" name="themes" onload="onload(this)">
+                            <select class="css-input" id="themes" name="themes">
                                 <c:forEach items="${topic}" var="topic">
                                     <option selected="selected"> ${topic.name} </option>
                                 </c:forEach>
@@ -43,6 +43,8 @@
                             <br>
                             <select class="css-input" id="tests" name="testName">
                                 <option>Выберите тест</option>
+                                <option>Second test</option>
+                                <option>Third test</option>
                             </select>
                     </div>
                     <br>
@@ -59,26 +61,6 @@
 
 </div>
 </div>
-
-
-<script type="text/javascript">
-    function onload(element) {
-        $.ajax({
-            url: "/UserChoose",
-            type: "GET",
-            dataType: "json",
-            data: {topic: $(element).val()},
-        })
-            .done(function (data) {
-                alert("done")
-                setTests(data)
-            })
-            .fail(function (xhr, status, error) {
-                alert("fail")
-                alert(xhr.responseText + '|\n' + status + '|\n' + error);
-            });
-    }
-</script>
 
 <script>
     $().ready(function () {
