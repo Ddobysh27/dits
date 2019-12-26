@@ -1,0 +1,33 @@
+.mylink:link{
+    text-decoration:none; color:#4e82be;
+}
+.mylink:visited{
+    text-decoration:none; color:#4e82be;
+}
+.mylink:hover{
+    text-decoration:none; color:#800000;
+}
+
+.somefont {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 30px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #4e82be;
+}
+
+.tbodyfont {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 15px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #000000;
+}
+
+.theadfont {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 15px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #FFFFFF;
+}
