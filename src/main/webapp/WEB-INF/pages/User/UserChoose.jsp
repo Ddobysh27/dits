@@ -7,10 +7,10 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="/res/mycont.css" rel="stylesheet" type="text/css">
-    <link href="/res/input.css" rel="stylesheet" type="text/css">
-    <link href="/res/button.css" rel="stylesheet" type="text/css">
-    <link href="/res/link.css" rel="stylesheet" type="text/css">
+    <link href="/res/user/mycont.css" rel="stylesheet" type="text/css">
+    <link href="/res/user/input.css" rel="stylesheet" type="text/css">
+    <link href="/res/user/button.css" rel="stylesheet" type="text/css">
+    <link href="/res/user/link.css" rel="stylesheet" type="text/css">
     <title>
         Select
     </title>
