@@ -1,12 +1,17 @@
 package incubator.controller.admin;
 
 
+import incubator.dao.QuestionRepository;
+import incubator.model.Question;
+import incubator.model.Test;
+import incubator.model.Topic;
 import incubator.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 import java.util.List;
@@ -23,21 +28,37 @@ public class AdminCreateTestController {
     @Autowired
     QuestionService questionService;
 
+
+
     @Autowired
-    RoleService roleService;
+    QuestionRepository questionRepository;
+
+    @Autowired
+    CreateTopicTestQuestionService ttqService;
 
 
-        @PostMapping("/createTest")
-        public String addTest(Model model){
+        @GetMapping("/saveNewQuestion")
+        public String addTest( //@RequestParam String nameTopic,
+//                              @RequestParam String nameTest,
+//                              @RequestParam String nameQuestion,
+                              //@RequestParam(value = "question") String nameQuestion,
+                               @RequestParam(name = "topic") String nameTopic,
+                               @RequestParam(name = "test") String nameTest,
+                               @RequestParam(name = "question") String nameQuestion,
+
+                               Model model){
+
+
+            Question completed = ttqService.createNewQuestion(nameTopic, nameTest, nameQuestion);
+
+
             List <String> nameTopics = topicService.getNamesTopics();
             List <String> nameTests = testService.getNamesTests();
             List <String> nameQuestions = questionService.getNamesQuestions();
-
-
-
             model.addAttribute("topics", nameTopics);
             model.addAttribute("tests", nameTests );
             model.addAttribute("questions", nameQuestions);
+            model.addAttribute("success", "Добавлен вопрос" + completed.toString() );
             return "Admin/createTest";
         }
 

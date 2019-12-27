@@ -3,6 +3,7 @@ package incubator.service;
 import incubator.dao.TestRepository;
 import incubator.model.Question;
 import incubator.model.Test;
+import incubator.model.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,5 +65,53 @@ public class TestService {
     public List<Test> getAllTests() {
         return testRepository.findAll(Test.class, testRepository.getBeanToBeAutowired());
     }
+
+    public Test getTest(String nameTest, Topic topic) {
+//        Test result = null;
+        for (Test t : getAllTests()
+        ) {
+            if (nameTest.equals(t.getName())) {
+                //добавить к тесту топик, возможно новый
+
+
+                return t;
+//                result.setTestId(t.getTestId());
+//                result.setTopic(topic);
+//                result.setName(t.getName());
+//                result.setDescription(t.getDescription());
+//                result = t;
+//                break;
+            }
+        }
+//        if (result == null) {
+            Test test = new Test();
+            test.setName(nameTest);
+            test.setTopic(topic);
+            testRepository.testingCreateMethod(test, testRepository.getBeanToBeAutowired());
+            return test;
+//            result = test;
+//        }
+//        return result;
+    }
+
+    public Test createTestByName(String nameTest, Topic topic){
+        Test newTest = new Test();
+        for (Test t : getAllTests()
+        ) {
+            if (nameTest.equals(t.getName())) {
+                newTest.setTestId(t.getTestId());
+                newTest.setDescription(t.getDescription());
+                newTest.setName(t.getName());
+                newTest.setTopic(topic);
+                return newTest;
+            }
+        }
+        newTest.setName(nameTest);
+        newTest.setDescription(nameTest);
+        newTest.setTopic(topic);
+        testRepository.create(newTest);
+        return newTest;
+    }
+
 
 }

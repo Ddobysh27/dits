@@ -24,20 +24,24 @@
 <%--    <p>${topic}</p>--%>
 
 <%--</c:forEach>--%>
-<form>
+<form action="saveNewQuestion"">
     <p>
-        <input list="topics">
-        <datalist id="topics">
-            <c:forEach items="${topics}" var="topic">
+        <input type="text"  required list="topics" placeholder="Выберите тему" id="topic" name="topic">
 
-            <option value="${topic}">
+<%--        <input list="topics" required>--%>
+        <datalist id="topics" name="nameTopic">
+            <c:forEach items="${topics}" var="topic" >
+
+            <option value="${topic}" >
 
                 </c:forEach>
         </datalist>
     </p>
 
     <p>
-        <input list="tests">
+        <input type="text"  required list="tests" placeholder="Выберите тест" id="test" name="test">
+
+    <%--        <input list="tests" required name="nameTest">--%>
         <datalist id="tests">
             <c:forEach items="${tests}" var="test">
 
@@ -48,9 +52,11 @@
     </p>
 
     <p>
-        <input list="questions">
+        <input type="text"  required list="questions" placeholder="Выберите вопрос" id="question" name="question">
+
+    <%--        <input list="questions" required name="nameQuestion">--%>
         <datalist id="questions">
-            <c:forEach items="${questions}" var="question">
+            <c:forEach items="${questions}" var="question" >
 
             <option value="${question}">
 
@@ -61,8 +67,13 @@
     <input type="submit" value="Отправить"></p>
 
 </form>
+<p id="success"><a style="color: green; font-size: 120%;">${success}</a></p>
 
-
+<script>
+    setTimeout(function () {
+        document.getElementById("success").style.display = 'none';
+    }, 4000)
+</script>
 
 <form action="/goHomeAdmin">
     <input type="submit" value="Назад">

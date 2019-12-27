@@ -21,13 +21,13 @@
 
         <table>
 
-                            <tr>
-                                <td><form:select path="nameRole"> <form:options items="${allRoles}"/> </form:select></td>
-                            </tr>
+            <tr>
+                <td><form:select path="nameRole"> <form:options items="${allRoles}"/> </form:select></td>
+            </tr>
 
-<%--            <tr>--%>
-<%--                <td><select id="nameRole"> <form:options items="${allRoles}"/> </select></td>--%>
-<%--            </tr>--%>
+                <%--            <tr>--%>
+                <%--                <td><select id="nameRole"> <form:options items="${allRoles}"/> </select></td>--%>
+                <%--            </tr>--%>
 
             <tr>
                 <td><form:input path="lastName" placeholder="Фамилия" required="true"/></td>

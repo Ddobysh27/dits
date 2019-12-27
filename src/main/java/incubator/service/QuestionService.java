@@ -4,6 +4,7 @@ package incubator.service;
 import incubator.dao.QuestionRepository;
 import incubator.model.Answer;
 import incubator.model.Question;
+import incubator.model.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,7 +56,7 @@ public class QuestionService {
         return questionRepository.findAll(Question.class, questionRepository.getBeanToBeAutowired());
     }
 
-    public List<String> getNamesQuestions(){
+    public List<String> getNamesQuestions() {
         List<String> namesTopics = new ArrayList<>();
         for (Question q : questionRepository.findAll(Question.class, questionRepository.getBeanToBeAutowired())
         ) {
@@ -65,10 +66,21 @@ public class QuestionService {
     }
 
     //public  ifExists
-
-
-
-
+    public Question getQuestionByDescription(String nameQuestion, Test test) {
+//        for (Question q : getAllQuestions()
+//        ) {
+//            if (nameQuestion.equals(q.getDescription())) {
+//                return q;
+//            }
+//        }
+        Question question = new Question();
+        question.setDescription(nameQuestion);
+        question.setTest(test);
+        //question.setTest(test);
+//        questionRepository.testingCreateMethod(question, questionRepository.getBeanToBeAutowired());
+        questionRepository.create(question);
+        return question;
+    }
 
 
 }
