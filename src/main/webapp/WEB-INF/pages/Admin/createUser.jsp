@@ -12,17 +12,50 @@
 <html>
 <head>
     <title>CreateUser</title>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="/res/user/mycont.css" rel="stylesheet" type="text/css">
+    <link href="/res/user/link.css" rel="stylesheet" type="text/css">
+    <link href="/res/user/input.css" rel="stylesheet" type="text/css">
+    <link href="/res/user/button.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
-<div class="CreateUser">
+<div class="mycont">
+    <div class="margin-top8">
+
+
+        <div class="row">
+            <div class="col">
+                <div class="mycont somefont">
+                    <%--                    <h1> Hello ${user}</h1>--%>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+
+                <div class="mycont">
+                    <img src="/resources/images/human.png">
+                </div>
+
+            </div>
+
+            <div class="col">
+<%--class="margin-top20"--%>
+                <div >
+                    <div class="mycont somefont">
+<%--                        <a href="<c:url value="/createTest" />">Создать тест</a> <br>--%>
+<%--                        <a href="<c:url value="/createUser" />">Создать пользователя</a> <br>--%>
+<%--                        <a href="<c:url value="/adminStatistic" />">Статистика</a> <br>--%>
+
     <form:form method="post" action="/createUser" modelAttribute="user">
 
         <table>
 
             <tr>
-                <td><form:select path="nameRole"> <form:options items="${allRoles}"/> </form:select></td>
+                <td><form:select  cssClass="css-input" path="nameRole"> <form:options items="${allRoles}"/> </form:select></td>
             </tr>
 
                 <%--            <tr>--%>
@@ -30,31 +63,46 @@
                 <%--            </tr>--%>
 
             <tr>
-                <td><form:input path="lastName" placeholder="Фамилия" required="true"/></td>
+                <td><form:input autocomplete="false" cssClass="css-input" path="lastName" placeholder="Фамилия" required="true"/></td>
             </tr>
             <tr>
-                <td><form:input path="firstName" placeholder="Имя" required="true"/></td>
+                <td><form:input cssClass="css-input" path="firstName" placeholder="Имя" required="true"/></td>
             </tr>
             <tr>
-                <td><input placeholder="Отчество"/></td>
+                <td><input class="css-input" placeholder="Отчество"/></td>
             </tr>
             <tr>
-                <td><form:password path="password" placeholder="Пароль" required="true"/></td>
+                <td><form:password cssClass="css-input" path="password" placeholder="Пароль" required="true"/></td>
             </tr>
             <tr>
-                <td><form:input path="login" placeholder="Логин" required="true"/></td>
+                <td><form:input cssClass="css-input" path="login" placeholder="Логин" required="true"/></td>
             </tr>
             <tr>
-                <td><input placeholder="Почта"/></td>
+                <td><input class="css-input" placeholder="Почта"/></td>
             </tr>
 
             <tr>
-                <td><input type="submit" value="Сохранить пользователя"/></td>
+                <td><input class="myButton" type="submit" value="Сохранить пользователя"/></td>
             </tr>
 
         </table>
     </form:form>
-    <p id="success"><a style="color: green; font-size: 120%;">${success}</a></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="mycont somefont">
+                    <a href="<c:url value="/goHomeAdmin" />">Назад</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 </div>
 
 <script>
@@ -63,9 +111,12 @@
     }, 4000)
 </script>
 
-<form action="/goHomeAdmin">
-    <input type="submit" value="Назад">
-</form>
+<%--<div class="CreateUser">--%>
+<%--    --%>
+<%--    <p id="success"><a style="color: green; font-size: 120%;">${success}</a></p>--%>
+<%--</div>--%>
+
+
 
 </body>
 </html>

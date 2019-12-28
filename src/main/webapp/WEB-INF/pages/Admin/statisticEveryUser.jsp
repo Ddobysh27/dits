@@ -11,25 +11,76 @@
 <html>
 <head>
     <title>Every user Statistic</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="/res/user/mycont.css" rel="stylesheet" type="text/css">
+    <link href="/res/user/link.css" rel="stylesheet" type="text/css">
+    <link href="/res/user/table.css" rel="stylesheet" type="text/css">
+    <link href="/res/user/button.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
-<table border="2">
-    <tr>
-        <th>Ф.И.О.</th>
-        <th>Название теста</th>
-        <th>Пройдено всего раз</th>
-        <th>Процент правильных ответов на все вопросы</th>
-    </tr>
-    <c:forEach items="${statistic}" var="item">
-        <tr>
-            <td> ${item.FIO} </td>
-            <td> ${item.name} </td>
-            <td> ${item.countCompleted} </td>
-            <td> ${item.percent} </td>
-        </tr>
-    </c:forEach>
-</table>
+<div class="mycont">
+    <div class="margin-top8">
+
+        <div class="row">
+            <div class="col">
+                <div class="mycont">
+
+                    <table class="blueTable">
+                        <thead>
+                        <tr>
+                            <th>Ф.И.О.</th>
+                            <th>Название теста</th>
+                            <th>Пройдено всего раз</th>
+                            <th>Процент правильных ответов на все вопросы</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${statistic}" var="item">
+                        <tr>
+                            <td> ${item.FIO} </td>
+                            <td> ${item.name} </td>
+                            <td> ${item.countCompleted} </td>
+                            <td> ${item.percent} </td>
+                        </tr>
+                        </c:forEach>
+                </div>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="mycont somefont">
+                <form action="/goUserHome">
+                    <input class="myButton" type="submit" value="Главная">
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<%--<table border="2">--%>
+<%--    <tr>--%>
+<%--        <th>Ф.И.О.</th>--%>
+<%--        <th>Название теста</th>--%>
+<%--        <th>Пройдено всего раз</th>--%>
+<%--        <th>Процент правильных ответов на все вопросы</th>--%>
+<%--    </tr>--%>
+<%--    <c:forEach items="${statistic}" var="item">--%>
+<%--        <tr>--%>
+<%--            <td> ${item.FIO} </td>--%>
+<%--            <td> ${item.name} </td>--%>
+<%--            <td> ${item.countCompleted} </td>--%>
+<%--            <td> ${item.percent} </td>--%>
+<%--        </tr>--%>
+<%--    </c:forEach>--%>
+<%--</table>--%>
 
 
 <form action="/goHomeAdmin">

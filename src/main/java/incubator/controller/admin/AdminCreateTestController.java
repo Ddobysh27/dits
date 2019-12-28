@@ -36,31 +36,24 @@ public class AdminCreateTestController {
     @Autowired
     CreateTopicTestQuestionService ttqService;
 
+    @GetMapping("/saveNewQuestion")
+    public String addTest( @RequestParam(name = "topic") String nameTopic,
+                           @RequestParam(name = "test") String nameTest,
+                           @RequestParam(name = "question") String nameQuestion,
+                           Model model){
 
-        @GetMapping("/saveNewQuestion")
-        public String addTest( //@RequestParam String nameTopic,
-//                              @RequestParam String nameTest,
-//                              @RequestParam String nameQuestion,
-                              //@RequestParam(value = "question") String nameQuestion,
-                               @RequestParam(name = "topic") String nameTopic,
-                               @RequestParam(name = "test") String nameTest,
-                               @RequestParam(name = "question") String nameQuestion,
+        Question completed = ttqService.createNewQuestion(nameTopic, nameTest, nameQuestion);
 
-                               Model model){
+        List <String> nameTopics = topicService.getNamesTopics();
+        List <String> nameTests = testService.getNamesTests();
+        List <String> nameQuestions = questionService.getNamesQuestions();
+        model.addAttribute("topics", nameTopics);
+        model.addAttribute("tests", nameTests );
+        model.addAttribute("questions", nameQuestions);
+        model.addAttribute("success", "Добавлен вопрос" + completed.toString() );
+        return "Admin/createTest";
+    }
 
-
-            Question completed = ttqService.createNewQuestion(nameTopic, nameTest, nameQuestion);
-
-
-            List <String> nameTopics = topicService.getNamesTopics();
-            List <String> nameTests = testService.getNamesTests();
-            List <String> nameQuestions = questionService.getNamesQuestions();
-            model.addAttribute("topics", nameTopics);
-            model.addAttribute("tests", nameTests );
-            model.addAttribute("questions", nameQuestions);
-            model.addAttribute("success", "Добавлен вопрос" + completed.toString() );
-            return "Admin/createTest";
-        }
 
         @GetMapping("/createTest")
         public String createTest(Model model){
