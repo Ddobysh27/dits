@@ -55,7 +55,7 @@
     <div class="row">
         <div class="col">
             <div class="mycont somefont">
-                <form action="/goUserHome">
+                <form action="/goHomeAdmin">
                     <input class="myButton" type="submit" value="Главная">
                 </form>
             </div>
