@@ -73,49 +73,42 @@ public class ViewStatisticService {
 
     private ViewStatistic getTestInfo(Test test) {
         ViewStatistic viewStatistic;
-        //вынестив в отдельный метод
-        //List<Statistic> statisticList = statisticService.getAllStatisticByQuestionId(question.getQuestionId());// statisticRepository.findAll(Statistic.class, statisticRepository.getBeanToBeAutowired()) ;
+        //получаем статистику, которая относится непосредственно к нашему тесту (текущему, который передали)
         List<Statistic> statisticList = statisticService.getFilteredStatisticByTestId(test.getTestId());// statisticRepository.findAll(Statistic.class, statisticRepository.getBeanToBeAutowired()) ;
-        //get list by currently question
-        // questionService.getAllQuestions().removeIf(t -> test.getTestId() != t.getTest().getTestId())
-
         if (!statisticList.isEmpty()) {
             int numberOfQuestionInTest = test.getQuestions().size();
-//            int numberOfTimes = Math.round(statisticList.size() / numberOfQuestionInTest);
+            //количество записей в статистике эквивалентно количеству ответов на вопросы, которые задействованы в данном тесте
             int numberOfTimes = statisticList.size();
-            //count all times to answer the question
-            int countOfCorrectAnswers = 0;
-            for (Statistic statistic : statisticList) {
-                if (statistic.isCorrect(statistic.getCorrect())) {
-                    countOfCorrectAnswers++;
-                }
-            }
+
+            //создаем запись для представления
             viewStatistic = new ViewStatistic(
                     test.getName(),
-                    numberOfTimes,
+                    numberOfTimes/ numberOfQuestionInTest,
                     calculatePercentage(statisticList));
-                    //вынести в отдельный метод процент правильных ответов
-//                    (int) Math.round(((double) (countOfCorrectAnswers / numberOfQuestionInTest)) / numberOfTimes * 100));
         } else {
+            //возвращаем null в случаем если статистика пуста
             viewStatistic = null;
         }
         return viewStatistic;
     }
 
-    public List<ViewStatistic> getTestStatisticList() {
-        List<ViewStatistic> testInfoList = new ArrayList<>();
-        ViewStatistic viewStatistic;
-        List<Test> testList = testService.getAllTests(); ///testRepository.findAll(Test.class, testRepository.getBeanToBeAutowired());
-        for (Test test : testList) {
-            viewStatistic = getTestInfo(test);
-            if (viewStatistic != null) {
-                testInfoList.add(viewStatistic);
+        public List<ViewStatistic> getTestStatisticList() {
+            List<ViewStatistic> testInfoList = new ArrayList<>();
+            ViewStatistic viewStatistic;
+            //получаем весь список вопросов
+            List<Test> testList = testService.getAllTests();
+            for (Test test : testList) {
+                //получаем информацию в удобном для нас представленнии по каждому из тестов
+                viewStatistic = getTestInfo(test);
+                if (viewStatistic != null) {
+                    //если в таблице статистики есть записи по этому тесту, то добавляем егов наш результирующий список
+                    testInfoList.add(viewStatistic);
+                }
             }
+            // сортировка списка по названию теста
+            testInfoList.sort(Comparator.comparing(ViewStatistic::getName));
+            return testInfoList;
         }
-        // сортировка списка по названию теста
-        testInfoList.sort(Comparator.comparing(ViewStatistic::getName));
-        return testInfoList;
-    }
 
     private ViewStatistic getUserTestInfo(Statistic statistic) {
 

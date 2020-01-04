@@ -15,36 +15,19 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>CreateTest</title>
-    <%--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>--%>
     <link href="/res/user/input.css" rel="stylesheet" type="text/css">
     <link href="/res/user/mycont.css" rel="stylesheet" type="text/css">
     <link href="/res/user/button.css" rel="stylesheet" type="text/css">
     <link href="/res/user/link.css" rel="stylesheet" type="text/css">
 
-<%--    <link href="/res/user/createTest.css" rel="stylesheet" type="text/css">--%>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 
-
-
-
-
-
-
-
 <div class="mycont">
     <div class="margin-top8">
 
-
-        <div class="row">
-            <div class="col">
-                <div class="mycont somefont">
-                    <%--                    <h1> Hello ${user}</h1>--%>
-                </div>
-            </div>
-        </div>
 
         <div class="row">
             <div class="col">
@@ -59,62 +42,52 @@
 
                 <div class="margin-top20">
                     <div class="mycont somefont">
-<%--                        <a href="<c:url value="/createTest" />">Создать тест</a> <br>--%>
-<%--                        <a href="<c:url value="/createUser" />">Создать пользователя</a> <br>--%>
-<%--                        <a href="<c:url value="/adminStatistic" />">Статистика</a> <br>--%>
-
-<%--    <c:forEach items="${topics}" var="topic">--%>
-
-<%--        <p>${topic}</p>--%>
-
-<%--    </c:forEach>--%>
 
 
+                        <form action="saveNewQuestion">
+                            <p>
+                                <input type="text" class="css-input" required list="topics" placeholder="Выберите тему"
+                                       id="topic" name="topic">
 
+                                <datalist id="topics" name="nameTopic">
+                                    <c:forEach items="${topics}" var="topic">
 
-    <form action="saveNewQuestion">
-        <p>
-            <input type="text" class="css-input" required list="topics" placeholder="Выберите тему" id="topic" name="topic">
+                                    <option value="${topic}">
 
-            <%--        <input list="topics" required>--%>
-            <datalist id="topics" name="nameTopic">
-                <c:forEach items="${topics}" var="topic" >
+                                        </c:forEach>
+                                </datalist>
+                            </p>
 
-                <option value="${topic}" >
+                            <p>
+                                <input type="text" class="css-input" required list="tests" placeholder="Выберите тест"
+                                       id="test" name="test">
 
-                    </c:forEach>
-            </datalist>
-        </p>
+                                <datalist id="tests">
+                                    <c:forEach items="${tests}" var="test">
 
-        <p>
-            <input type="text" class="css-input" required list="tests" placeholder="Выберите тест" id="test" name="test">
+                                    <option value="${test}">
 
-            <%--        <input list="tests" required name="nameTest">--%>
-            <datalist id="tests">
-                <c:forEach items="${tests}" var="test">
+                                        </c:forEach>
+                                </datalist>
+                            </p>
 
-                <option value="${test}">
+                            <p>
+                                <input type="text" class="css-input" required list="questions"
+                                       placeholder="Выберите вопрос" id="question" name="question">
 
-                    </c:forEach>
-            </datalist>
-        </p>
+                                <%--        <input list="questions" required name="nameQuestion">--%>
+                                <datalist id="questions">
+                                    <c:forEach items="${questions}" var="question">
 
-        <p>
-            <input type="text" class="css-input" required list="questions" placeholder="Выберите вопрос" id="question" name="question">
+                                    <option value="${question}">
 
-            <%--        <input list="questions" required name="nameQuestion">--%>
-            <datalist id="questions">
-                <c:forEach items="${questions}" var="question" >
+                                        </c:forEach>
+                                </datalist>
+                            </p>
 
-                <option value="${question}">
+                            <input type="submit" class="myButton" value="Отправить"></p>
 
-                    </c:forEach>
-            </datalist>
-        </p>
-
-        <input type="submit" class="myButton" value="Отправить"></p>
-
-    </form>
+                        </form>
                     </div>
                 </div>
 
@@ -140,10 +113,6 @@
         document.getElementById("success").style.display = 'none';
     }, 4000)
 </script>
-
-<%--<form action="/goHomeAdmin">--%>
-<%--    <input type="submit" value="Назад">--%>
-<%--</form>--%>
 
 </body>
 </html>

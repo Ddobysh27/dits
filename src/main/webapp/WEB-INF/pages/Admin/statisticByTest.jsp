@@ -45,8 +45,9 @@
                             <td> ${item.percent} </td>
                         </tr>
                         </c:forEach>
+                    </table>
                 </div>
-                </table>
+
 
             </div>
         </div>
