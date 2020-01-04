@@ -19,7 +19,7 @@ public class User {
     @Column
     private String login;
     @Column
-    private int password;
+    private String password;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "roleId")
@@ -43,7 +43,7 @@ public class User {
                 '}';
     }
 
-    public User(String firstName, String lastName, String login, int password, Role role) {
+    public User(String firstName, String lastName, String login, String password, Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;
@@ -51,7 +51,7 @@ public class User {
         this.role = role;
     }
 
-    public User(String firstName, String lastName, String login, int password, String nameRole) {
+    public User(String firstName, String lastName, String login, String password, String nameRole) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;
@@ -104,7 +104,6 @@ public class User {
             roleByNameRole.setTutor(1);
         }
         return roleByNameRole;
-
     }
 
     public void setStatistics(List<Statistic> statistics) {
@@ -143,11 +142,11 @@ public class User {
         this.login = login;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(int password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 

@@ -44,6 +44,12 @@ public class HomeController {
         return "Access_Denied";
     }
 
+    @GetMapping(value = "/accessDenied")
+    public String anotherDenied(ModelMap model) {
+        model.addAttribute("user", getPrincipal());
+        return "Access_Denied";
+    }
+
     @GetMapping(value = "/login")
     public String loginPage() {
         return "login";

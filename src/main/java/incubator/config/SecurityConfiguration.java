@@ -12,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.sql.DataSource;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -29,6 +31,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    DataSource dataSource;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -36,21 +41,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-        for (User u : userService.getAllUsers()
-        ) {
-            auth.inMemoryAuthentication().passwordEncoder(passwordEncoder)
-                    .withUser(u.getLogin())
-                    .password(passwordEncoder.encode("" + u.getPassword()))
-                    .roles(u.getStringNameRole());
-        }
+        auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(passwordEncoder)
+                .usersByUsernameQuery("select login, password, roleId"
+                        + " from user where login=?")
+                .authoritiesByUsernameQuery("select login, nameRole "
+                        + "from user where login=?");
+
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        String passStr = "password";
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/user**", "/chooseTest**", "/personalStatistic**", "/goUserHome**", "/UserChoose**", "/goTest**", "/nextTestPage**", "/resultPage**").access("hasRole('USER')")
+                .antMatchers("/user**", "/chooseTest**", "/personalStatistic**", "/goUserHome**", "/UserChoose**", "/goTest**", "/nextTestPage**", "/resultPage**").access("hasRole('ROLE_USER')")
                 .antMatchers("/admin").access("hasRole('ADMIN')")
                 .antMatchers("/tutor").access("hasRole('TUTOR')")
                 .and().formLogin().loginPage("/login").successHandler(customSuccessHandler)
