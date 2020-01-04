@@ -42,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(passwordEncoder)
-                .usersByUsernameQuery("select login, password, roleId"
+                .usersByUsernameQuery(" select login, password, roleId "
                         + " from user where login=?")
                 .authoritiesByUsernameQuery("select login, nameRole "
                         + "from user where login=?");
@@ -53,7 +53,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/user**", "/chooseTest**", "/personalStatistic**", "/goUserHome**", "/UserChoose**", "/goTest**", "/nextTestPage**", "/resultPage**").access("hasRole('ROLE_USER')")
+                .antMatchers("/user**", "/chooseTest**", "/personalStatistic**", "/goUserHome**", "/UserChoose**", "/goTest**", "/nextTestPage**", "/resultPage**").access("hasRole('USER')")
                 .antMatchers("/admin").access("hasRole('ADMIN')")
                 .antMatchers("/tutor").access("hasRole('TUTOR')")
                 .and().formLogin().loginPage("/login").successHandler(customSuccessHandler)

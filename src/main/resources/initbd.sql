@@ -47,8 +47,9 @@ CREATE TABLE `user`(
 `firstName` varchar(20),
 `lastName` varchar(20),
 `login` varchar(20),
-`password` integer(10),
+`password` varchar(255),
 `roleId` integer(10) NOT NULL,
+'nameRole' varchar(20),
 FOREIGN KEY (`roleId`) REFERENCES `role` (`roleId`) ON DELETE CASCADE
 );
 
@@ -98,12 +99,12 @@ UNLOCK TABLES;
 
 lock tables user write;
 insert into user values
-(1, "Gavin", "Belson", "GavinBelson", 101, 1),
-(2, "Peter", "Gregory", "PeetGreg", 102, 3),
-(3, "Richard", "Hendrics", "RichHen", 103, 2),
-(4, "Gilfoy", "Canadian", "Canadaonelove", 104, 1),
-(5, "Denesh", "Pakistan", "Pakistani", 105, 3),
-(6, "Dmitry", "Dobysh", "admin", 123, 3);
+(1, "Gavin", "Belson", "GavinBelson", '$2a$10$UZ7N1svPS/DAQIuxV1ZpQ.l428I/edY0dGTZSpuYfbm/AFuOeDD2m', 1, 'ROLE_USER'),
+(2, "Peter", "Gregory", "PeetGreg", '$2a$10$UZ7N1svPS/DAQIuxV1ZpQ.l428I/edY0dGTZSpuYfbm/AFuOeDD2m', 3, 'ROLE_ADMIN'),
+(3, "Richard", "Hendrics", "RichHen", '$2a$10$UZ7N1svPS/DAQIuxV1ZpQ.l428I/edY0dGTZSpuYfbm/AFuOeDD2m', 2, 'ROLE_TUTOR'),
+(4, "Gilfoy", "Canadian", "Canadaonelove", '$2a$10$UZ7N1svPS/DAQIuxV1ZpQ.l428I/edY0dGTZSpuYfbm/AFuOeDD2m', 1, 'ROLE_USER'),
+(5, "Denesh", "Pakistan", "Pakistani", '$2a$10$UZ7N1svPS/DAQIuxV1ZpQ.l428I/edY0dGTZSpuYfbm/AFuOeDD2m', 3, 'ROLE_ADMIN'),
+(6, "Dmitry", "Dobysh", "admin", '$2a$10$UZ7N1svPS/DAQIuxV1ZpQ.l428I/edY0dGTZSpuYfbm/AFuOeDD2m', 3, 'ROLE_ADMIN');
 unlock tables;
 
 LOCK TABLES `question` WRITE;
