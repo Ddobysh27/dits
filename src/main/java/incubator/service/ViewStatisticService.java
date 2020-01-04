@@ -81,7 +81,8 @@ public class ViewStatisticService {
 
         if (!statisticList.isEmpty()) {
             int numberOfQuestionInTest = test.getQuestions().size();
-            int numberOfTimes = Math.round(statisticList.size() / numberOfQuestionInTest);
+//            int numberOfTimes = Math.round(statisticList.size() / numberOfQuestionInTest);
+            int numberOfTimes = statisticList.size();
             //count all times to answer the question
             int countOfCorrectAnswers = 0;
             for (Statistic statistic : statisticList) {
@@ -92,8 +93,9 @@ public class ViewStatisticService {
             viewStatistic = new ViewStatistic(
                     test.getName(),
                     numberOfTimes,
+                    calculatePercentage(statisticList));
                     //вынести в отдельный метод процент правильных ответов
-                    (int) Math.round(((double) (countOfCorrectAnswers / numberOfQuestionInTest)) / numberOfTimes * 100));
+//                    (int) Math.round(((double) (countOfCorrectAnswers / numberOfQuestionInTest)) / numberOfTimes * 100));
         } else {
             viewStatistic = null;
         }
@@ -190,14 +192,14 @@ public class ViewStatisticService {
     }
 
 
-    private int countAllAnswer(Statistic statistic) {
-
-        List<Statistic> statisticListTestId = statisticService.getFilteredStatisticByTestId(statistic.getQuestion().getTest().getTestId());
-        List<Statistic> statisticListUserId = statisticService.getFilteredStatisticByUserId(statistic.getUser().getUserId(), statisticListTestId);
-        //statisticService.getAllStatisticByTestId(statistic.getQuestion().getTest().getTestId());
-
-        return statisticListUserId.size();
-    }
+//    private int countAllAnswer(Statistic statistic) {
+//
+//        List<Statistic> statisticListTestId = statisticService.getFilteredStatisticByTestId(statistic.getQuestion().getTest().getTestId());
+//        List<Statistic> statisticListUserId = statisticService.getFilteredStatisticByUserId(statistic.getUser().getUserId(), statisticListTestId);
+//        //statisticService.getAllStatisticByTestId(statistic.getQuestion().getTest().getTestId());
+//
+//        return statisticListUserId.size();
+//    }
 
     public List<ViewStatistic> getUserTestStatisticList() {
 
