@@ -18,7 +18,7 @@ public class TestRepository implements DaoRepos<Test> {
         return sessionFactory;
     }
 
-    public double testsDifficulty(int x) {
+    public int testsDifficulty(int testId) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -26,9 +26,9 @@ public class TestRepository implements DaoRepos<Test> {
 
 //            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/managementsystem?verifyServerCertificate=false&useSSL=true", "root", "123qwe");
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select   testdifficulty(" + x + ")");
+            ResultSet rs = st.executeQuery("select   testdifficulty(" + testId + ")");
             while (rs.next()) {
-                return rs.getDouble(1);
+                return (int) (rs.getDouble(1) * 100);
             }
         } catch (ClassNotFoundException ex1) {
             System.out.println("Class not found EX " + ex1.getMessage());
@@ -37,5 +37,7 @@ public class TestRepository implements DaoRepos<Test> {
         }
         return 1;
     }
+
+
 
 }
