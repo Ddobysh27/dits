@@ -49,7 +49,7 @@ CREATE TABLE `user`(
 `login` varchar(20),
 `password` varchar(255),
 `roleId` integer(10) NOT NULL,
-'nameRole' varchar(20),
+`nameRole` varchar(20),
 FOREIGN KEY (`roleId`) REFERENCES `role` (`roleId`) ON DELETE CASCADE
 );
 
