@@ -46,7 +46,6 @@
                         </tr>
                         </c:forEach>
                 </div>
-                </table>
 
             </div>
         </div>
@@ -65,29 +64,6 @@
 </div>
 </div>
 
-<%--<table border="1">--%>
-<%--    <tr>--%>
-<%--        <th>Формулировка вопроса</th>--%>
-<%--        <th>Пройдено всего</th>--%>
-<%--        <th>Процент правильно пройденных вопросов</th>--%>
-<%--    </tr>--%>
-
-<%--    <c:forEach items="${statisticList}" var="item">--%>
-
-
-<%--        <tr>--%>
-<%--            <td> ${item.name} </td>--%>
-<%--            <td> ${item.countCompleted} </td>--%>
-<%--            <td> ${item.percent} </td>--%>
-<%--        </tr>--%>
-<%--    </c:forEach>--%>
-<%--</table>--%>
-
-<%--<br>--%>
-
-<form action="/goHomeAdmin">
-    <input type="submit" value="Home page">
-</form>
 
 </body>
 </html>

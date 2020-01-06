@@ -31,7 +31,6 @@ public class AdminStatisticPageController {
     @GetMapping("/statisticByTest")
     public String viewStatisticTest(ModelMap modelMap) {
         List<ViewStatistic> statisticByTestList = viewStatisticService.getTestStatisticList();
-//            Collections.sort(varList, new SortByQuestionId());
         modelMap.addAttribute("statisticList", statisticByTestList);
         return "Admin/statisticByTest";
     }

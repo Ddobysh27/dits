@@ -27,14 +27,6 @@
 
         <div class="row">
             <div class="col">
-                <div class="mycont somefont">
-                    <%--                    <h1> Hello ${user}</h1>--%>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
 
                 <div class="mycont">
                     <img src="/resources/images/human.png">
@@ -46,9 +38,7 @@
 <%--class="margin-top20"--%>
                 <div >
                     <div class="mycont somefont">
-<%--                        <a href="<c:url value="/createTest" />">Создать тест</a> <br>--%>
-<%--                        <a href="<c:url value="/createUser" />">Создать пользователя</a> <br>--%>
-<%--                        <a href="<c:url value="/adminStatistic" />">Статистика</a> <br>--%>
+
 
     <form:form method="post" action="/createUser" modelAttribute="user">
 
@@ -57,10 +47,6 @@
             <tr>
                 <td><form:select  cssClass="css-input" path="nameRole"> <form:options items="${allRoles}"/> </form:select></td>
             </tr>
-
-                <%--            <tr>--%>
-                <%--                <td><select id="nameRole"> <form:options items="${allRoles}"/> </select></td>--%>
-                <%--            </tr>--%>
 
             <tr>
                 <td><form:input autocomplete="false" cssClass="css-input" path="lastName" placeholder="Фамилия" required="true"/></td>
