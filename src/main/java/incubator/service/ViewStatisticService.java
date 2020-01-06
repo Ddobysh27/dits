@@ -117,10 +117,6 @@ public class ViewStatisticService {
         List<Statistic> statisticList = statisticService.getFilteredStatisticByTestUser(statistic);
 
         if (!statisticList.isEmpty()) {
-            //int countQuestionInTest = statistic.getQuestion().getTest().getQuestions().size();
-            //int numberOfTimes = Math.round(statisticList.size() / numberOfQuestionInTest);
-            int countAllAnswers = statisticList.size(); //countAllAnswer(statistic);
-            int countOfCorrectAnswers = countCorrectAnswer(statistic);
 
             //посчитать сколько раз проходил данный тест данный пользователь
             int countTimesCompletedTest = countUserCompletedTest(statistic);
@@ -130,9 +126,8 @@ public class ViewStatisticService {
                     statistic.getUser().getFIO(),
                     statistic.getQuestion().getTest().getName(),
                     countTimesCompletedTest,
-                    //вынести в отдельный метод процент правильных ответов
+                    //процент правильных ответов
                     calculatePercentage(statisticList)
-                    //(int) Math.round(((double) (countOfCorrectAnswers / countAllAnswers)) * 100)
             );
 
         } else {
@@ -143,7 +138,6 @@ public class ViewStatisticService {
 
     }
 
-    //  private int countUserCompletedTest(int userId, int testId){
     private int countUserCompletedTest(Statistic statistic) {
 
         int count = 0;
@@ -196,19 +190,24 @@ public class ViewStatisticService {
 
     public List<ViewStatistic> getUserTestStatisticList() {
 
+        //создадим пустой спискок, в который будем добавлять представления
         List<ViewStatistic> userTestInfoList = new ArrayList<>();
+        //объявим класс пледставления статистики
         ViewStatistic viewStatistic;
+        //возьмём выборку всей статистики
         List<Statistic> statisticList = statisticService.findAll();
         for (Statistic statistic : statisticList) {
+            //получим по текущей статистике представление
             viewStatistic = getUserTestInfo(statistic);
             if (viewStatistic != null) {
                 userTestInfoList.add(viewStatistic);
             }
         }
-        // сортировка списка по названию FIO
+        //добавим результирующий список в Set для исключения повторений
         Set<ViewStatistic> set = new HashSet<>(userTestInfoList);
         userTestInfoList.clear();
         userTestInfoList.addAll(set);
+        // сортировка списка по названию FIO
         userTestInfoList.sort(Comparator.comparing(ViewStatistic::getFIO));
 
         return userTestInfoList;
