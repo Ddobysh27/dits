@@ -11,7 +11,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
-3<div class="mycont">
+<div class="mycont">
     <div class="margin-top8">
 
         <c:url var="loginUrl" value="/login"/>
@@ -35,7 +35,8 @@
             <p>
                 <input type="password" class="password-field css-input" id="password" name="password"
                        placeholder="Пароль"
-                       value="" required>
+                       value=""
+                       required>
             </p>
             <p>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

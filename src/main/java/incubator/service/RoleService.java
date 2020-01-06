@@ -9,10 +9,10 @@ public class RoleService {
     public Role createRole(String nameRole){
         Role role = new Role(0,0,0);
 
-        if (nameRole.contains("admin") || nameRole.contains("ADMIN")) {
+        if (nameRole.contains("admin") || nameRole.contains("ROLE_ADMIN")) {
             role.setAdmin(1);
             role.setRoleId(3);
-        } else if (nameRole.contains("user") || nameRole.contains("USER")) {
+        } else if (nameRole.contains("user") || nameRole.contains("ROLE_USER")) {
             role.setRoleId(1);
             role.setUser(1);
         } else {
