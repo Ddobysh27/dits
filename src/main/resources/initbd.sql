@@ -22,7 +22,7 @@ FOREIGN KEY (`topicId`) REFERENCES `topic` (`topicId`) ON DELETE CASCADE
 
 CREATE TABLE `question`(
 `questionId` integer(10) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-`description` varchar(100),
+`description` varchar(255),
 `testId` integer(10),
 FOREIGN KEY (`testId`) REFERENCES `test` (`testId`) ON DELETE CASCADE
 );
@@ -109,10 +109,10 @@ unlock tables;
 
 LOCK TABLES `question` WRITE;
 INSERT INTO `question` VALUES
-(1,'Question 1','1'),
-(2,'Question 2','1'),
-(3,'Question 3','1'),
-(4,'Question 4','1'),
+(1,'Какой модификатор доступа наиболее закрытый?','1'),
+(2,'Сколько методов у класса Object?','1'),
+(3,'Какая сложность вставки (в середину) элемента в ArrayList','1'),
+(4,'Какой модификатор имеет отношение к исключениям?','1'),
 (5,'Question 1','2'),
 (6,'Question 2','2'),
 (7,'Question 3','2'),
@@ -149,12 +149,10 @@ UNLOCK TABLES;
 
 lock tables literature write;
 insert into literature values
-(1,
- 
-"Literature 1", 1),
-(2, "Literature 2", 2),
-(3, "Literature 3", 3),
-(4, "Literature 4", 4),
+(1,"Модификаторы доступа", 1),
+(2, "Класс Object", 2),
+(3, "Оценка сложности коллекций", 3),
+(4, "Разница между final, finally, finalize", 4),
 (5, "Literature 5", 5),
 (6, "Literature 6", 6),
 (7, "Literature 7", 7),
@@ -171,10 +169,10 @@ unlock tables;
 
 lock tables link write;
 insert into link values
-(1, "Link 1", 1),
-(2, "Link 2", 2),
-(3, "Link 3", 3),
-(4, "Link 4", 4),
+(1, "http://www.quizful.net/interview/java/access-modifiers", 1),
+(2, "http://developer.alexanderklimov.ru/android/java/object.php", 2),
+(3, "https://www.codeflow.site/ru/article/java-collections-complexity", 3),
+(4, "https://www.javatpoint.com/difference-between-final-finally-and-finalize", 4),
 (5, "Link 5", 5),
 (6, "Link 6", 6),
 (7, "Link 7", 7),
@@ -191,25 +189,25 @@ unlock tables;
 
 LOCK TABLES `answer` WRITE;
 INSERT INTO `answer` VALUES
-(1,'Answer 1 (true)','1','1'),
-(2,'Answer 2 (false)','0','1'),
-(3,'Answer 3 (false)','0','1'),
-(4,'Answer 4 (false)','0','1'),
+(1,'public','0','1'),
+(2,'private','1','1'),
+(3,'protected','0','1'),
+(4,'default','0','1'),
 
-(5,'Answer 1 (true)','1','2'),
-(6,'Answer 2 (false)','0','2'),
-(7,'Answer 3 (false)','0','2'),
-(8,'Answer 4 (false)','0','2'),
+(5,'3','0','2'),
+(6,'6','0','2'),
+(7,'9','1','2'),
+(8,'12','0','2'),
 
-(9,'Answer 1 (true)','1','3'),
-(10,'Answer 2 (false)','0','3'),
-(11,'Answer 3 (false)','0','3'),
-(12,'Answer 4 (false)','0','3'),
+(9,'O(1)','0','3'),
+(10,'O(n)','1','3'),
+(11,'O(log(n))','0','3'),
+(12,'O(n(log(n)))','0','3'),
 
-(13,'Answer 1 (true)','1','4'),
-(14,'Answer 2 (false)','0','4'),
-(15,'Answer 3 (false)','0','4'),
-(16,'Answer 4 (false)','0','4'),
+(13,'final','0','4'),
+(14,'finish','0','4'),
+(15,'finalize','0','4'),
+(16,'finally','1','4'),
 
 (17,'Answer 1 (true)','1','5'),
 (18,'Answer 2 (false)','0','5'),
@@ -335,4 +333,4 @@ RETURN (x4);
 END
 //
 
-DELIMITER ;*/
+DELIMITER ; */

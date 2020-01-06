@@ -36,7 +36,7 @@
                             <div> ${question} </div>
                             <br>
                             <c:forEach items="${answers}" var="answer">
-                                <input type="radio" name="choosenAns" value="${answer}"> ${answer}<br>
+                                <input type="radio" name="choosenAns" checked value="${answer}"> ${answer}<br>
                             </c:forEach>
                             <br>
                             <input class="myButton" type="submit" value="Следующий">

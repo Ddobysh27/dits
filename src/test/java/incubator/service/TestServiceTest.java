@@ -47,11 +47,7 @@ public class TestServiceTest extends AbstractTestNGSpringContextTests {
         }
     }
 
-    @Test
-    public void encoder() {
-        String encoded = new BCryptPasswordEncoder().encode("password");
-        System.out.println(encoded);
-    }
+
 
 
 }

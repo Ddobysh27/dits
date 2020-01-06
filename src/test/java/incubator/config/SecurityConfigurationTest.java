@@ -3,6 +3,7 @@ package incubator.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -26,5 +27,12 @@ public class SecurityConfigurationTest extends AbstractTestNGSpringContextTests 
 
         //48626
     }
+
+    @Test
+    public void encoder() {
+        String encoded = new BCryptPasswordEncoder().encode("101");
+        System.out.println(encoded);
+    }
+
 
 }

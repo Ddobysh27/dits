@@ -42,7 +42,6 @@
 
                             <br>
                             <select class="css-input" id="tests" name="testName">
-                                <option>Выберите тест</option>
                                 <option>Second test</option>
                                 <option>Third test</option>
                             </select>
