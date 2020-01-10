@@ -25,10 +25,10 @@ public class AnswerServiceTest extends AbstractTestNGSpringContextTests {
     @Autowired
     private AnswerService answerService;
 
-    @Test
+/*    @Test
     public void showAll() {
-        System.out.println(answerService.getAnswerByDescription("2 false answer on first question"));
-    }
+        System.out.println(answerService.getAnswerByDescription(""));
+    }*/
 
 
 
